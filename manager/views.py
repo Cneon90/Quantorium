@@ -27,6 +27,7 @@ def reg(request):
 
 def user_login(request):
     data = {}
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -35,7 +36,8 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    data['res'] = 'Authenticated successfully'
+                    return render(request, 'manager/index.html', {"name": user, "msg": "msg"})
+                    #data['res'] = 'Authenticated successfully'
                 else:
                     data['res'] = 'Disabled account'
             else:
