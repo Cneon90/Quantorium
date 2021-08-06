@@ -1,0 +1,51 @@
+<!-- templates/registration/login.html -->
+{% extends 'manager/main.html' %}
+
+
+{% block content %}
+
+  <div class="layer"></div>
+<main class="page-center">
+  <article class="sign-up">
+    <h1 class="sign-up__title">Вход</h1>
+    <p class="sign-up__subtitle">Введите логин и пароль</p>
+
+    <form class="sign-up-form form"  method="POST">
+    {% csrf_token %}
+
+      <label class="form-label-wrapper">
+        <p class="form-label">Логин</p>
+        <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+      </label>
+
+
+      <label class="form-label-wrapper">
+        <p class="form-label">Пароль</p>
+        <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+      </label>
+
+    <br>
+    <br>
+
+      <button class="form-btn primary-default-btn transparent-btn">Вход</button>
+
+    </form>
+  </article>
+</main>
+<!-- Chart library -->
+<script src="./plugins/chart.min.js"></script>
+<!-- Icons library -->
+<script src="plugins/feather.min.js"></script>
+<!-- Custom scripts -->
+<script src="js/script.js"></script>
+
+
+{% endblock content %}
+
+
+
+{% block main-nav %}
+
+
+{% endblock %}
+
