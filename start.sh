@@ -1,4 +1,3 @@
 #!/bin/bash
-cd /var/www/qvantorium/
-source /var/www/qvantorium/Quantorium/env/bin/activate
+cd /var/www/Quantorium/
 exec gunicorn -c "gunicorn_config.py" Quantorium.wsgi
