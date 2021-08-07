@@ -1,6 +1,9 @@
 <!-- templates/registration/login.html -->
 {% extends 'manager/main.html' %}
 
+{% block namepage  %}
+     Вход
+{% endblock %}
 
 {% block content %}
 
@@ -10,7 +13,7 @@
       {% if msg %}
         {{ msg }}
       {% endif %}
-    <h1 class="sign-up__title">Вход</h1>
+    <h1 class="sign-up__title"></h1>
 
 
     <form class="sign-up-form form"  method="POST">

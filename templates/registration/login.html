@@ -1,4 +1,8 @@
 <!-- templates/registration/login.html -->
+{% block namepage  %}
+     Вход
+{% endblock %}
+
 {% extends 'manager/main.html' %}
 
 
@@ -7,7 +11,7 @@
   <div class="layer"></div>
 <main class="page-center">
   <article class="sign-up">
-    <h1 class="sign-up__title">Вход</h1>
+    <h1 class="sign-up__title"></h1>
     <p class="sign-up__subtitle">Введите логин и пароль</p>
 
     <form class="sign-up-form form"  method="POST">
