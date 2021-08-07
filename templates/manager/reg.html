@@ -19,11 +19,14 @@
         <p class="form-label">Имя</p>
           {{ form.username }}
       </label>
-
+        <div class="error">  {{ form.errors.username }}</div>
       <label class="form-label-wrapper">
         <p class="form-label">Email</p>
        {{ form.email }}
       </label>
+    <div class="error">  {{ form.errors.email }}</div>
+
+
       <label class="form-label-wrapper">
         <p class="form-label">Пароль</p>
         {{ form.password1 }}
@@ -33,7 +36,7 @@
        {{ form.password2 }}
       </label>
 
-
+     <div class="error">   {{ form.errors.password2 }}</div>
 
 <br>
 
@@ -45,12 +48,14 @@
     </form>
 
 
-   <div class="error"> {{ res }} </div>
+
 
 
 
 
     </article>
+
+
 
     </main>
 <!-- Chart library -->

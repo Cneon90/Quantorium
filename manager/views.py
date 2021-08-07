@@ -10,6 +10,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RegistrForm, LoginForm
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -36,15 +38,19 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'manager/index.html', {"name": user, "msg": "msg"})
+                    #return render(request, 'manager/index.html', {"name": user, "msg": "msg"}) #Не срабатывает изменение url
+                    return redirect('index') #Работает )
                     #data['res'] = 'Authenticated successfully'
                 else:
-                    data['res'] = 'Disabled account'
+                    data['activ'] = 'Ваша учетная запись не активна, обратитесь к администратору'
             else:
-                data['res'] = 'Invalid login'
+                data['res'] = 'Неверный логин, или пароль'
     else:
         form = LoginForm()
     return render(request, 'manager/login.html', {'form': form,"data":data})
+
+
+
 
 # Функция регистрации
 def registr(request):
@@ -62,12 +68,16 @@ def registr(request):
             data['form'] = form
             # Передача надписи, если прошло всё успешно
             data['res'] = "Всё прошло успешно"
+
+            #return render(request, 'manager/login.html', {"msg":"Регистрация прошла успешно, авторизируйтесь"})
+            return redirect('login')
             # Рендаринг страницы
-            return render(request, 'manager/reg.html', data)
+            #return render(request, 'manager/reg.html', data)
         else:
             data['form'] = form
-            # Передача надписи, если прошло всё успешно
-            data['res'] = "Всё плохо"
+
+            data['res'] = form.errors.as_data()
+            print(form.errors.as_data())
             # Рендаринг страницы
             return render(request, 'manager/reg.html', data)
 
@@ -83,7 +93,31 @@ def registr(request):
 #Выход из системы
 def logout_view(request):
     data = {}
-    print("norm")
     data['res'] = "Вышли"
     logout(request)
     return render(request, 'manager/index.html', data)
+
+
+#Пример отправки письма (удалить)
+def mail(request):
+    data = {}
+    print("mails")
+    print(send_mail(
+        'Subject here',
+        'Here is the message.',
+        'quantorium_tomsk@mail.ru',
+        ['kirillkalita2@gmail.com'],
+        fail_silently=True,#(True Страница загрузится даже если произошла ошибка) (false не загрузится)
+    ))
+    return render(request, 'manager/index.html', data)
+
+def setting(request):
+
+    data = {}
+    data['name'] = request.user.username
+    u = User.objects.get(username__exact=data['name'])
+    u.email="test@mail.ru"
+    u.save()
+    data['email'] = request.user.email
+    #User.save()
+    return render(request, 'manager/setting.html', data)

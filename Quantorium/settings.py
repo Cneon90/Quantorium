@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-745f!05i0pzb6@&h)&4(!x6s=fs@994*douiiblo9m^15z$3(c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['2.134.128.85','192.168.1.101','127.0.0.1']
-
+#ALLOWED_HOSTS = ['2.134.128.85','192.168.1.101','127.0.0.1','qantorium.ddns.net','0.0.0.0']
+ALLOWED_HOSTS = ['*',]
 
 # Application definition
 
@@ -135,3 +135,11 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index' # Новое изменение
+
+#Email
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "quantorium_tomsk@mail.ru"
+EMAIL_HOST_PASSWORD = "hF8QlBkzXVoQnPdRp5jr"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
