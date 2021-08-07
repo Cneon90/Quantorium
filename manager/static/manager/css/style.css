@@ -3133,7 +3133,7 @@ label {
   padding: 40px 40px 56px;
   background-color: #FFFFFF;
   text-align: left;
-  min-width: 800px;
+  margin: 140px 0px 140px 0px;
 }
 
 .form-label {
