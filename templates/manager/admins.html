@@ -1,0 +1,96 @@
+{% extends "manager/main.html" %}
+{% block bar %}
+  {% if longing %}   sidebar {% else %}  sidebarno {% endif %}
+{% endblock %}
+
+
+
+{% block namepage %}
+        Администраторская
+
+{% endblock %}
+
+
+
+{% block content %}
+
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        <h2 class="main-title"></h2>
+
+        <div class="row">
+          <div class="col-lg-9">
+              <div class="text">
+                    Все пользователи
+               <table>
+                    <tr>
+                        <th class="name">Имя</th>
+                        <th class="name"> Почта </th>
+
+                        <th class="name"> Телефон </th>
+                        <th class="name"> Школа </th>
+                        <th class="name"> Класс </th>
+
+
+                        <th class="name"> Изменить </th>
+                        <th class="name"> Удалить  </th>
+
+                    </tr> <!--ряд с ячейками заголовков-->
+                    {% for user in users %}
+                            <tr>
+                                <td class="names2"> <a href="{% url 'profile' user.id %}">  {{ user.username }} </a> </td>
+                                <td class="names2"> {{ user.email }}</td>
+
+                                <td class="names2"> {{ user.profile.Phone }}</td>
+                                <td class="names2"> {{ user.profile.School_name }}</td>
+                                <td class="names2"> {{ user.profile.School_class }}</td>
+
+
+
+                                <td class="names2"> <a href="redit?id={{ user.id }}"> Изменить </a>  </td>
+                                <td class="names3"> <a href="delete?id={{ user.id }}"> Удалить </a></td>
+
+
+                            </tr>
+
+
+
+
+                    {% endfor %}
+
+                  </table>
+              </div>
+
+
+
+          </div>
+          <div class="col-lg-3">
+          <article class="white-block">
+              <div class="top-cat-title">
+                <h3>Последнии новости </h3>
+                <p></p>
+              </div>
+              <ul class="top-cat-list">
+
+                  {% for news in new %}
+
+                <li>
+                  <a href="{% url 'new_post' news.id %}">
+                    <div class="top-cat-list__title">
+                     {{ news.heading }}
+                    </div>
+                    <div class="top-cat-list__subtitle">
+                      {{ news.data }}
+                    </div>
+                  </a>
+            {% endfor %}
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+{% endblock %}
+

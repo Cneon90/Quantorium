@@ -1,6 +1,10 @@
 <!-- templates/registration/login.html -->
 {% extends 'manager/main.html' %}
 
+{% block bar %}
+  {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
+{% endblock %}
+
 {% block namepage  %}
      Вход
 {% endblock %}
@@ -8,12 +12,12 @@
 {% block content %}
 
   <div class="layer"></div>
-<main class="page-center">
-  <article class="sign-up">
-      {% if msg %}
-        {{ msg }}
-      {% endif %}
-    <h1 class="sign-up__title"></h1>
+    <main class="page-center">
+        <article class="sign-up">
+            {% if msg %}
+               {{ msg }}
+                  {% endif %}
+                     <h1 class="sign-up__title"></h1>
 
 
     <form class="sign-up-form form"  method="POST">
@@ -41,6 +45,7 @@
                       {{ data.res}}
 
         </div>
+
 </main>
 <!-- Chart library -->
 <script src="./plugins/chart.min.js"></script>

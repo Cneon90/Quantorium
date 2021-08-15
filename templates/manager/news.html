@@ -4,13 +4,12 @@
   {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
 {% endblock %}
 
-{% block indexactive %}
-     active
+{% block newsactiv %}
+ active
 {% endblock %}
 
-
 {% block namepage %}
-       Главная страница
+      <i class="fa fa-rss-square" aria-hidden="true"></i></i>Новости
 {% endblock %}
 
 
@@ -25,14 +24,23 @@
           <div class="col-lg-9">
               <div class="text">
 
-                    Добро пожаловать на сайт Кванториума, тут ты можешь записаться на курсы и получать
-                    уведомление о всех событиях жизни нашей организации
+                  {% for news in new %}
+
+                    <div class="newsblock">
+                 <a href="{% url 'new_post' news.id %}">
+                         <div class="zagolovog"> <a href="{% url 'new_post' news.id %}"> {{ news.heading }} <i class="fa fa-graduation-cap" aria-hidden="true"></i></a> </div>
+                         <div class="telo"> <a href="{% url 'new_post' news.id %}"> {{ news.body }} </a> </div>
+                         <div class="ndata"> <a href="{% url 'new_post' news.id %}">  {{ news.data }} {{ news.time }} </a> </div>
+                    </a>
+                    </div>
+
+                  {% endfor %}
+
               </div>
 
           </div>
           <div class="col-lg-3">
-        {% if exit %}
-            <article class="white-block">
+           <article class="white-block">
               <div class="top-cat-title">
                 <h3>Последнии новости </h3>
                 <p></p>
@@ -53,7 +61,6 @@
             {% endfor %}
               </ul>
             </article>
-        {% endif %}
           </div>
         </div>
       </div>

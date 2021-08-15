@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'manager.middleware.Ferst'
 ]
 
 ROOT_URLCONF = 'Quantorium.urls'
@@ -143,3 +144,6 @@ EMAIL_HOST_USER = "quantorium_tomsk@mail.ru"
 EMAIL_HOST_PASSWORD = "hF8QlBkzXVoQnPdRp5jr"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+#column new Количество новостей в колонке с права
+NEWS_COLUMN = 5

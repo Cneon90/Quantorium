@@ -4,76 +4,76 @@
   {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
 {% endblock %}
 
-{% block namepage  %}
-     Регистрация
+
+{% block namepage %}
+      {{ user.username }}
 {% endblock %}
+
 
 
 {% block content %}
 
-    <div class="layer"></div>
-<main class="page-center">
-  <article class="sign-up">
-    <h1 class="sign-up__title"></h1>
-    <p class="sign-up__subtitle">
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        <h2 class="main-title"></h2>
 
-    </p>
-
-
-<form class="sign-up-form form"  method="POST">
-    {% csrf_token %}
-
-      <label class="form-label-wrapper">
-        <p class="form-label">Имя</p>
-          {{ form.username }}
-
-      </label>
-        <div class="error">  {{ form.errors.username }}  <p class="form-label">  <div class="otv" id="zanat">  </div></p> </div>
-      <label class="form-label-wrapper">
-        <p class="form-label">Email</p>
-       {{ form.email }}
-      </label>
-
-    <div class="error">  {{ form.errors.email }}</div>
-
-
-      <label class="form-label-wrapper">
-        <p class="form-label">Пароль</p>
-        {{ form.password1 }}
-      </label>
-      <label class="form-label-wrapper">
-        <p class="form-label">Повторите пароль</p>
-       {{ form.password2 }}
-      </label>
-
-     <div class="error">   {{ form.errors.password2 }}</div>
-
-<br>
+        <div class="row">
+          <div class="col-lg-9">
+              <div class="text">
+                  <div class="text">
 
 
 
 
+                      Имя:      {{ user.username }} <br>
+                          маил:  {{ user.email }}<br>
+                          Город: {{ user.profile.Location }}<br>
+                          Номер школы: {{ user.profile.School_name }}<br>
+                          Класс: {{ user.profile.School_class }}<br>
+                          День рождение: {{ user.profile.Birth_date }}<br>
+                          серия паспорта     {{ user.profile.Passport_series }}<br>
+                          Номер паспорта     {{ user.profile.Passport_number }}<br>
+                          Кем выдан:     {{ user.profile.Passport_received }}<br>
+                          Номер телефона: {{ user.profile.Phone }}<br>
+                          Возраст: {{ age }}
+                        <br>
+                        <br>
+                        <br>
+                      {%  if age < 14 %}
+                            <a href="#">  Добавить родителя </a>
+                      {% endif %}
 
-      <button class="form-btn primary-default-btn transparent-btn" type="submit" >Регистрация</button>
-    </form>
+              </div>
+              </div>
 
+          </div>
+          <div class="col-lg-3">
+         <article class="white-block">
+              <div class="top-cat-title">
+                <h3>Последнии новости </h3>
+                <p></p>
+              </div>
+              <ul class="top-cat-list">
 
+                  {% for news in new %}
 
-
-
-
-
-    </article>
-
-
-
+                <li>
+                  <a href="{% url 'new_post' news.id %}">
+                    <div class="top-cat-list__title">
+                     {{ news.heading }}
+                    </div>
+                    <div class="top-cat-list__subtitle">
+                      {{ news.data }}
+                    </div>
+                  </a>
+            {% endfor %}
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
     </main>
-<!-- Chart library -->
-<script src="./plugins/chart.min.js"></script>
-<!-- Icons library -->
-<script src="plugins/feather.min.js"></script>
-<!-- Custom scripts -->
-<script src="js/script.js"></script>
+
 
 {% endblock %}
 
@@ -138,7 +138,7 @@
       </div>
        <div class="registr">
            <div class="reg lines">
-               <a href={% url 'registration' %}> Регистрация </a>
+               <a href="#"> Регистрация </a>
             </div>
            <div class="reg">
                <a href="#">  Вход </a>

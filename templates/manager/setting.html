@@ -1,120 +1,144 @@
 {% extends "manager/main.html" %}
 
+{% block bar %}
+  {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
+{% endblock %}
+
+{% block namepage %}
+ Настройки профиля  {{ name }}
+{% endblock %}
 
 {% block content %}
 
     <main class="main users chart-page" id="skip-target">
       <div class="container">
-        <h2 class="main-title">Настройки аккаунта</h2>
+          <div class="row">
+              <div class="col-lg-9">
+                <article class="sign-up">
+                    <div class="kirill">
 
-        <div class="row">
-          <div class="col-lg-9">
-                <div class="kirill">
 
-                    {{ email }}
+                        <form class="sign-up-form form button_save"  method="POST">
+                        {% csrf_token %}
 
-                </div>
+                            <label class="form-label-wrapper">
+                                 <p class="form-label">E-mail</p>
+                                      {{ form.email }}
+                            </label>
+                                <div class="error">  {{ form.errors.email }}  <p class="form-label"> </p> </div>
+                                <div class="podverdir"> <a href="#" style="text-align: center">Подтвердить</a> </div>
 
-          </div>
-          <div class="col-lg-3">
-            <article class="customers-wrapper">
-              <canvas id="customersChart" aria-label="Customers statistics" role="img"></canvas>
-              <!--              <p class="customers__title">New Customers <span>+958</span></p>
-              <p class="customers__date">28 Daily Avg.</p>
-              <picture><source srcset="./img/svg/customers.svg" type="image/webp"><img src="./img/svg/customers.svg" alt=""></picture> -->
-            </article>
+
+
+
+                            <label class="form-label-wrapper">
+                                 <p class="form-label">Серия паспорта</p>
+                                      {{ form.Passport_series }}
+                            </label>
+                                <div class="error">  {{ form.errors.Passport_series }}  <p class="form-label"> </p> </div>
+
+
+
+                            <label class="form-label-wrapper">
+                                <p class="form-label">Номер паспорта</p>
+                               {{ form.Passport_number }}
+                            </label>
+                                <div class="error">  {{ form.errors.Passport_number }}  <p class="form-label"> </p> </div>
+
+                             <label class="form-label-wrapper">
+                                <p class="form-label">Кем и когда выдан</p>
+                               {{ form.Passport_received }}
+                            </label>
+                                <div class="error">  {{ form.errors.Passport_received }}  <p class="form-label"> </p> </div>
+
+
+                             <label class="form-label-wrapper">
+                                <p class="form-label">Место проживания</p>
+                               {{ form.Location }}
+                            </label>
+                                <div class="error">  {{ form.errors.Location }}  <p class="form-label"> </p> </div>
+
+
+
+                             <label class="form-label-wrapper">
+                                <p class="form-label">Номер школы</p>
+                               {{ form.School_name }}
+                            </label>
+                                <div class="error">  {{ form.errors.School_name}}  <p class="form-label"> </p> </div>
+
+                              <label class="form-label-wrapper">
+                                <p class="form-label"> Класс </p>
+                               {{ form.School_class }}
+                            </label>
+                                <div class="error">  {{ form.errors.School_class }}  <p class="form-label"> </p> </div>
+
+                             <label class="form-label-wrapper2">
+                                <p class="form-label2">День рождения</p>
+                                    {{ form.Birth_date }}
+                            </label>
+                                <div class="error">  {{ form.errors.Birth_date }}  <p class="form-label"> </p> </div>
+
+
+                             <label class="form-label-wrapper">
+                                <p class="form-label">Телефон</p>
+                               {{ form.Phone }}
+                            </label>
+                                <div class="error">  {{ form.errors.Phone }}  <p class="form-label"> </p> </div>
+
+
+
+
+
+
+                            <label class="form-label-wrapper">
+
+
+
+
+
+
+                                <p class="form-label">  <div class="otv" id="zanat">  </div></p>
+                            </label>
+                            <button type="submit" > Сохранить</button>
+                        </form>
+
+
+
+                        </form>
+
+
+
+                    </div>
+                </article>
+              </div>
+                    <div class="col-lg-3">
             <article class="white-block">
               <div class="top-cat-title">
-                <h3>Top categories</h3>
-                <p>28 Categories, 1400 Posts</p>
+                <h3>Последнии новости </h3>
+                <p></p>
               </div>
               <ul class="top-cat-list">
+
+                  {% for news in new %}
+
                 <li>
-                  <a href="##">
+                  <a href="{% url 'new_post' news.id %}">
                     <div class="top-cat-list__title">
-                      Lifestyle <span>8.2k</span>
+                     {{ news.heading }}
                     </div>
                     <div class="top-cat-list__subtitle">
-                      Dailiy lifestyle articles <span class="purple">+472</span>
+                      {{ news.data }}
                     </div>
                   </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Tutorials <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Coding tutorials <span class="blue">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Technology <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Dailiy technology articles <span class="danger">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      UX design <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      UX design tips <span class="success">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Interaction tips <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Interaction articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      App development <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Mobile development articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Nature <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Wildlife animal articles <span class="warning">+472</span>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="##">
-                    <div class="top-cat-list__title">
-                      Geography <span>8.2k</span>
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      Geography articles <span class="primary">+472</span>
-                    </div>
-                  </a>
-                </li>
+            {% endfor %}
               </ul>
             </article>
           </div>
-        </div>
-      </div>
-    </main>
+</div>
+
+
+
+
 
 
 {% endblock %}
@@ -187,5 +211,5 @@
            </div>
        </div>
     </div>
-
+   </div>
 {% endblock %}

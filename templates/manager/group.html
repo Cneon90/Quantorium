@@ -1,0 +1,112 @@
+{% extends "manager/main.html" %}
+
+{% block bar %}
+  {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
+{% endblock %}
+
+{% block groups %}
+ active
+{% endblock %}
+
+
+{% block groups_visible %}
+ visible
+{% endblock %}
+
+{% block namepage %}
+      <i class="fa fa-university" aria-hidden="true"></i> Группы
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        <h2 class="main-title"></h2>
+
+        <div class="row">
+
+            <div class="col-lg-4">
+
+
+
+                <div class="add_group">
+                    <div class="headers"> Добавление новой группы </div>
+                    <form method="POST">
+                         {% csrf_token %}
+                       {{ form.as_p }}
+                        <input name="redact" value="{{ knopka_red }}" hidden >
+
+
+                        {% if knopka_red %}
+                                 <button class="knopka" > Редактировать </button>
+                               <a href="?">  <i class="fa fa-plus-square-o" aria-hidden="true"></i>  </a>
+                         {% else %}
+                                  <button class="knopka" > Добавить </button>
+                        {% endif %}
+                    </form>
+                    <br>
+                   <div class="error">  {{ error }}</div>
+                </div>
+            </div>
+
+
+          <div class="col-lg-5">
+              <div class="text">
+                    <div class="group_list">
+        Список групп:
+       <table>
+                    <tr>
+                        <th class="name">Имя</th>
+                        <th class="name"> Редактировать </th>
+                        <th class="name"> Удалить </th>
+                     </tr>
+            {% for courses in course %}
+                <tr>
+                  <td class="names2">  <a href="?redactory=1&id={{ courses.id }}"> {{ courses.g_name }} </a>   </td>
+                  <td class="names2">  <a href="?redactory=1&id={{ courses.id }}"> Редактировать </a>   </td>
+                  <td class="names3">  <a href="?delete=1&id={{ courses.id }}"> Удалить </a>    </td>
+                </tr>
+                    {% endfor %}
+       </table>
+    </div>
+
+              </div>
+
+          </div>
+
+          <div class="col-lg-3">
+            <article class="white-block">
+              <div class="top-cat-title">
+                <h3>Последнии новости </h3>
+                <p></p>
+              </div>
+              <ul class="top-cat-list">
+
+                  {% for news in new %}
+
+                <li>
+                  <a href="{% url 'new_post' news.id %}">
+                    <div class="top-cat-list__title">
+                     {{ news.heading }}
+                    </div>
+                    <div class="top-cat-list__subtitle">
+                      {{ news.data }}
+                    </div>
+                  </a>
+            {% endfor %}
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+{% endblock %}
+
+
