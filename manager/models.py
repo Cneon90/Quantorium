@@ -42,12 +42,24 @@ class personal(models.Model):
     def __str__(self):
         return self.user.username
 
+class Course(models.Model):
+    name = models.CharField(max_length=30, blank=True)
+    data_create = models.DateField(null=True, blank=True)
+    def __str__(self):
+        return self.name
+
+type_course= (
+    ('R', 'Платные'),
+    ('B', 'Бесплатные'),
+
+)
 
 class Group(models.Model):
     g_user = models.ManyToManyField(User)
     g_name = models.CharField(max_length=30, blank=True)
     prepod = models.ForeignKey(personal, on_delete=models.CASCADE,null=True)  # Привязываем к модели юзер
-
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Привязываем к модели юзер
+    type_cours= models.CharField(max_length=1, choices=type_course,null=True)
     def __str__(self):
         return self.g_name
 
@@ -62,13 +74,24 @@ class novelty(models.Model):
 
 
 
+class claim(models.Model):
+    name =   models.ForeignKey(User, on_delete=models.CASCADE, null=True)#ManyToManyField(User)  # Привязываем к модели юзер
+    course = models.ManyToManyField(Course)   #ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Привязываем к модели курс
+    status = models.CharField(max_length=30,  null=True)
+
+    def __str__(self):
+        return self.name
+
+
 
 
 
 
 #Добавляем в админку
 admin.site.register(Group)
+admin.site.register(Course)
 admin.site.register(Profile)
 admin.site.register(Parent)
 admin.site.register(personal)
 admin.site.register(novelty)
+admin.site.register(claim)

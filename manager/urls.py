@@ -11,25 +11,33 @@ urlpatterns = [
     path('logout', views.logout_view, name='logout'),
     path('setting', views.setting, name='setting'),
     url(r'^login/$', views.user_login, name='login'),
-    #path('accounts/', include('django.contrib.auth.urls')),                   # Добавили новый маршрут
-    path('reg/', views.registr, name='reg'),                  # Добавили новый маршрут
-    path('news/', views.news, name='news'),                  # Добавили новый маршрут
-    path('group/', views.group, name='group'),                  # Добавили новый маршрут
-    path('add_news/', views.add_news, name='add_news'),                  # Добавили новый маршрут
-    path('add_course/', views.add_course, name='add_course'),                  # Добавили новый маршрут
-    path('edit_news/<int:id_post>', views.edit_news, name='edit_news'),                  # Добавили новый маршрут
-    path('delete_news/<int:id_post>', views.delete_news, name='delete_news'),                  # Добавили новый маршрут
-    path('mail/', views.mail, name='mail'),                  # mail
+    #path('accounts/', include('django.contrib.auth.urls')),                   #
+    path('reg/', views.registr, name='reg'),                  #
+                    # т
+    path('group/', views.group, name='group'),                  #
+    path('profile_group/<int:id_profile>', views.profile_group, name='profile_group'),                  #
+              # Д
+
+    #Course
+    path('add_course/', views.add_course, name='add_course'),
+    path('edit_course/<int:id_profile>', views.edit_course, name='edit_course'),
+    path('delete_course/<int:id_profile>', views.delete_course, name='delete_course'),
+
+    #news
+    path('edit_news/<int:id_post>', views.edit_news, name='edit_news'),                  # Д
+    path('delete_news/<int:id_post>', views.delete_news, name='delete_news'),                  #
+    path('news/', views.news, name='news'),
+    path('new/<int:post>', views.new_post, name='new_post'),
+    path('add_news/', views.add_news, name='add_news'),
 
 
-    path('profile/<int:profileid>', views.profile, name='profile'),                  # mail
-    path('new/<int:post>', views.new_post, name='new_post'),                  # mail
-    path('profile/<name>', views.myprofile, name='myprofile'),                  # mail
+    path('profile/<int:profileid>', views.profile, name='profile'),                  #
+    path('profile/<name>', views.myprofile, name='myprofile'),                  #
 
 
     #api
     path('api/login', views.api_login, name='api/login'),
-
+    path('mail/', views.mail, name='mail'),
 
     #Администрирование
     path('admins/user', views.admin_user, name='admins/admins'),

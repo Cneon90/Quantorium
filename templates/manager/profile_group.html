@@ -6,12 +6,7 @@
 
 
 {% block namepage %}
-   <div class="head_news">    {{ new_post.heading }}</div>
-   <div class="name_news">    {{ new_post.name    }}</div>
-   <div class="name_news">    {{ new_post.data    }}</div>
-
-
-
+    Группа "{{ group.g_name }}"
 {% endblock %}
 
 
@@ -23,22 +18,48 @@
         <h2 class="main-title"></h2>
 
         <div class="row">
-          <div class="col-lg-9">
+          <div class="col-lg-4">
               <div class="text">
                   <div class="text">
 
+                        Название: {{ group.g_name }} <br>
 
-                {{ new_post.body }}
-            <br>
+                        Преподаватель: {{ group.prepod }} <br>
+                        Курс: {{ group.course }} <br>
 
+                        Ученики: <br>
+                       {% for user in group.g_user.all %} <br>
+                      {{ user }} {{ group.user_set.id }}
+                         {% endfor %}
 
+                       <br>
+                       <br>
+                       <br>
+                       <br>
+                       <br>
+                       <br>
+                       <br>
+
+        <form method="post">
+              {% csrf_token %}
+                        Курс:
+                  <select name="item_id">
+                  {% for cours in cours %}
+                        <option value="{{ cours.id }}">{{ cours.name }}</option>
+                  {% endfor %}
+
+                  </select>
+                    <br>
+                    <br>
+                  <button type="submit"> Сохранить </button>
+</form>
               </div>
               </div>
 
           </div>
+            <div class="col-lg-5"> Список подавших заявки </div>
           <div class="col-lg-3">
-              {% include 'manager/show_news.html' %}
-
+            {% include 'manager/show_news.html' %}
           </div>
         </div>
       </div>

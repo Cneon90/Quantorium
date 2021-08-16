@@ -307,10 +307,28 @@ def edit_news(request,id_post):
     data['post_data'] = edit.data
     data['post_time'] = edit.time
     data['form'] = form
-
-
-
     return render(request, 'manager/add_news.html', data)
+
+
+
+
+
+
+def profile_group(request,id_profile):
+    data={}
+
+
+    data.update(init_news(request))
+    gr = Group.objects.get(id=id_profile)
+    gr.g_user.add(User.objects.get(id=10))
+    data['cours'] = Course.objects.all()
+    data['group'] = gr
+    if request.method=="POST":
+        print(request.POST['item_id'])
+        gr.course = Course.objects.get(id=request.POST['item_id'])
+    return render(request, 'manager/profile_group.html', data)
+
+
 
 
 
@@ -335,10 +353,10 @@ def group(request):
     prep= Course.objects.get(g_name="3D моделирование")
     data['error'] = prep.prepod.user.username
  """
-
+    objectlist = Course.objects.all()
+    data['list'] = objectlist
     group = Group.objects.all() # Выбираем все группы для списка
     data['Group'] = group #Передаем их в шаблон
-
     form = add_group() #Создаем форму
 
     if request.GET.get('delete'): #Если нажали удалить (существует такой параметр в GET)
@@ -425,12 +443,47 @@ def add_news(request):
     return render(request, 'manager/add_news.html', data)
 
 
+def edit_course(request,id):
+    data={}
+
+    return render(request, 'manager/add_course.html', data)
+
+
+
+
+
+def delete_course(request,id_profile):
+    post = Course.objects.get(id=id_profile)
+    post.delete()
+    print("delete")
+    return redirect('add_course')
+
+
+
+
 
 
 
 def add_course(request):
     data={}
+    form = add_cours()
+    data['form'] = form
+
+    if request.method == "POST":
+        form = add_cours(request.POST)
+        if form.is_valid():
+            dataform = form.cleaned_data
+
+            try:
+                cour=Course.objects.get(name = dataform['name'])
+                print("exces")
+                data['error'] = 'Такой курс уже есть'
+            except Course.DoesNotExist:
+                cour = Course.objects.create(name=dataform['name'])
+                cour.save()
+
     data.update(init_news(request))
+    data['courses'] = Course.objects.all()
     return render(request, 'manager/add_course.html', data)
 
 

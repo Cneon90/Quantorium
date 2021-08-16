@@ -4701,3 +4701,18 @@ label {
   background: #2f49d1;
   box-shadow: 10px 15px 20px rgba(160, 163, 189, 1);
 }
+
+.head_news
+{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.name_news
+{
+   font-size: 14px;
+   color: #cccccc;
+   padding-left: 10px;
+
+}
+

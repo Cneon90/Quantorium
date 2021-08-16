@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 # Подключаем модель User
 from django.contrib.auth.models import User
+from .models import *
 
 
 from django import forms
@@ -49,9 +50,12 @@ class setting_p(forms.Form):
 class add_group(forms.Form):
     Name = forms.CharField(label='Название группы', widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Введите название группы'}))
 
+
 class add_new_post(forms.Form):
     zagolovok = forms.CharField(label='Заголовок', widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Заголовок'}))
     body = forms.CharField(label='Текст ', widget=forms.Textarea)
 
 
+class add_cours(forms.Form):
+    name = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Название курса'}))
 

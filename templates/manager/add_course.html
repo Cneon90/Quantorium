@@ -69,11 +69,11 @@
                                 <th class="name"> Удалить </th>
                              </tr>
 
-                   {% for news in all_news %}
+                   {% for cours in courses %}
                         <tr>
-                          <td class="names2">  <a href="{% url 'edit_news' news.id %} "> {{ news.heading  }}  </a>   </td>
-                          <td class="names2">  <a href="{% url 'edit_news' news.id %}"> Редактировать </a>   </td>
-                          <td class="names3">  <a href="{% url 'delete_news' news.id %}"> Удалить </a>    </td>
+                          <td class="names2">  <a href="{% url 'edit_course' cours.id %} "> {{ cours.name  }}  </a>   </td>
+                          <td class="names2">  <a href="{% url 'edit_course' cours.id %}"> Редактировать </a>   </td>
+                          <td class="names3">  <a href="{% url 'delete_course' cours.id %}"> Удалить </a>    </td>
                         </tr>
                             {% endfor %}
                  </table>

@@ -43,9 +43,13 @@
 
 
                         {% if knopka_red %}
+
                                  <button class="knopka" > Редактировать </button>
                                <a href="?">  <i class="fa fa-plus-square-o" aria-hidden="true"></i>  </a>
                          {% else %}
+                            <br>
+                            <br>
+                            <br>
                                   <button class="knopka" > Добавить </button>
                         {% endif %}
                     </form>
@@ -67,7 +71,7 @@
                      </tr>
             {% for Groups in Group %}
                 <tr>
-                  <td class="names2">  <a href="?redactory=1&id={{ Groups.id }}"> {{ Groups.g_name }} </a>   </td>
+                  <td class="names2">  <a href="{% url 'profile_group' Groups.id %}  "> {{ Groups.g_name }} </a>   </td>
                   <td class="names2">  <a href="?redactory=1&id={{ Groups.id }}"> Редактировать </a>   </td>
                   <td class="names3">  <a href="?delete=1&id={{ Groups.id }}"> Удалить </a>    </td>
                 </tr>
