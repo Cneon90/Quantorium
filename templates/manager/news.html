@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block namepage %}
-      <i class="fa fa-rss-square" aria-hidden="true"></i></i>Новости
+      <i class="fa fa-rss-square" aria-hidden="true"></i>Новости
 {% endblock %}
 
 
@@ -28,7 +28,7 @@
 
                     <div class="newsblock">
                  <a href="{% url 'new_post' news.id %}">
-                         <div class="zagolovog"> <a href="{% url 'new_post' news.id %}"> {{ news.heading }} <i class="fa fa-graduation-cap" aria-hidden="true"></i></a> </div>
+                         <div class="zagolovog"> <a href="{% url 'new_post' news.id %}"> {{ news.heading }} <i class="fa fa-flag" aria-hidden="true"></i></a> </div>
                          <div class="telo"> <a href="{% url 'new_post' news.id %}"> {{ news.body }} </a> </div>
                          <div class="ndata"> <a href="{% url 'new_post' news.id %}">  {{ news.data }} {{ news.time }} </a> </div>
                     </a>
@@ -40,27 +40,7 @@
 
           </div>
           <div class="col-lg-3">
-           <article class="white-block">
-              <div class="top-cat-title">
-                <h3>Последнии новости </h3>
-                <p></p>
-              </div>
-              <ul class="top-cat-list">
-
-                  {% for news in new %}
-
-                <li>
-                  <a href="{% url 'new_post' news.id %}">
-                    <div class="top-cat-list__title">
-                     {{ news.heading }}
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      {{ news.data }}
-                    </div>
-                  </a>
-            {% endfor %}
-              </ul>
-            </article>
+            {% include 'manager/show_news.html' %}
           </div>
         </div>
       </div>

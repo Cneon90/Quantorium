@@ -4,7 +4,7 @@
   {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
 {% endblock %}
 
-{% block news %}
+{% block course %}
  active
 {% endblock %}
 
@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block namepage %}
-     <i class="fa fa-plus-square" aria-hidden="true"></i> Новость
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i> Курсы
 {% endblock %}
 
 
@@ -35,7 +35,7 @@
 
 
                 <div class="add_news">
-                    <div class="headers"> Добавление новости </div>
+                    <div class="headers"> Добавление курса </div>
                     <form method="POST">
                          {% csrf_token %}
                              {{ form.as_p }}

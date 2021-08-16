@@ -336,19 +336,19 @@ def group(request):
     data['error'] = prep.prepod.user.username
  """
 
-    cours = Course.objects.all() # Выбираем все группы для списка
-    data['course'] = cours #Передаем их в шаблон
+    group = Group.objects.all() # Выбираем все группы для списка
+    data['Group'] = group #Передаем их в шаблон
 
     form = add_group() #Создаем форму
 
     if request.GET.get('delete'): #Если нажали удалить (существует такой параметр в GET)
-        delet = Course.objects.get(id=request.GET['id']) #Ищем по ид
+        delet = Group.objects.get(id=request.GET['id']) #Ищем по ид
         delet.delete() #Удаляем запись
         return redirect('group') #Обновляем страницу (Выходим из функции)
 
     if request.GET.get('redactory'): #Если нажали на редактировать (имя из списка нажали)
         data['knopka_red'] = True #Устанавливаем скрытому полю значение
-        poisk= Course.objects.get(id=request.GET.get('id'))#Ищем запись с указанным ид
+        poisk= Group.objects.get(id=request.GET.get('id'))#Ищем запись с указанным ид
         dataform = {'Name': poisk.g_name} #Передаем в форму
         form = add_group(dataform) #Создаем форму и заполняем найденым значением
 
@@ -363,16 +363,16 @@ def group(request):
              dataform = form.cleaned_data # получаем чистые данные
              try:
                 if request.GET.get('redactory'):#Если была нажата кнопка редактировать (заранее)
-                    red = Course.objects.get(id=request.GET['id']) #ищем ид который так же передавался
+                    red = Group.objects.get(id=request.GET['id']) #ищем ид который так же передавался
                     red.g_name = dataform['Name'] #новое значение
                     red.save() # сохраняем
 
                     return redirect('group') #Обновляем страницу(редерект туда же)
                 #Если не была нажата кнопка редактировать, значит пытаемся добавить
-                new=Course.objects.get(g_name=dataform['Name'])
+                new=Group.objects.get(g_name=dataform['Name'])
                 data['error'] = 'Уже есть такой курс' #Если нашелся такой же курс
-             except Course.DoesNotExist:#Если не нашелся создаем
-                new=Course.objects.create(g_name=dataform['Name'])
+             except Group.DoesNotExist:#Если не нашелся создаем
+                new=Group.objects.create(g_name=dataform['Name'])
                 new.save()#Сохраняем
 
     return render(request, 'manager/group.html', data)
@@ -403,7 +403,7 @@ def add_news(request):
                 data['error'] = 'Такая новость уже есть'
              except novelty.DoesNotExist:
                 new=novelty.objects.create(
-
+                    name=request.user.first_name+" "+request.user.last_name,
                     heading=dataform['zagolovok'],
                     body=dataform['body'],
                     data=date.today(),
@@ -423,6 +423,33 @@ def add_news(request):
 
 
     return render(request, 'manager/add_news.html', data)
+
+
+
+
+
+def add_course(request):
+    data={}
+    data.update(init_news(request))
+    return render(request, 'manager/add_course.html', data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

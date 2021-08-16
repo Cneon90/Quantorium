@@ -43,7 +43,7 @@ class personal(models.Model):
         return self.user.username
 
 
-class Course(models.Model):
+class Group(models.Model):
     g_user = models.ManyToManyField(User)
     g_name = models.CharField(max_length=30, blank=True)
     prepod = models.ForeignKey(personal, on_delete=models.CASCADE,null=True)  # Привязываем к модели юзер
@@ -67,7 +67,7 @@ class novelty(models.Model):
 
 
 #Добавляем в админку
-admin.site.register(Course)
+admin.site.register(Group)
 admin.site.register(Profile)
 admin.site.register(Parent)
 admin.site.register(personal)

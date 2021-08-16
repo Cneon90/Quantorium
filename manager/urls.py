@@ -16,6 +16,7 @@ urlpatterns = [
     path('news/', views.news, name='news'),                  # Добавили новый маршрут
     path('group/', views.group, name='group'),                  # Добавили новый маршрут
     path('add_news/', views.add_news, name='add_news'),                  # Добавили новый маршрут
+    path('add_course/', views.add_course, name='add_course'),                  # Добавили новый маршрут
     path('edit_news/<int:id_post>', views.edit_news, name='edit_news'),                  # Добавили новый маршрут
     path('delete_news/<int:id_post>', views.delete_news, name='delete_news'),                  # Добавили новый маршрут
     path('mail/', views.mail, name='mail'),                  # mail

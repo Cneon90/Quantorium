@@ -65,11 +65,11 @@
                         <th class="name"> Редактировать </th>
                         <th class="name"> Удалить </th>
                      </tr>
-            {% for courses in course %}
+            {% for Groups in Group %}
                 <tr>
-                  <td class="names2">  <a href="?redactory=1&id={{ courses.id }}"> {{ courses.g_name }} </a>   </td>
-                  <td class="names2">  <a href="?redactory=1&id={{ courses.id }}"> Редактировать </a>   </td>
-                  <td class="names3">  <a href="?delete=1&id={{ courses.id }}"> Удалить </a>    </td>
+                  <td class="names2">  <a href="?redactory=1&id={{ Groups.id }}"> {{ Groups.g_name }} </a>   </td>
+                  <td class="names2">  <a href="?redactory=1&id={{ Groups.id }}"> Редактировать </a>   </td>
+                  <td class="names3">  <a href="?delete=1&id={{ Groups.id }}"> Удалить </a>    </td>
                 </tr>
                     {% endfor %}
        </table>
@@ -80,27 +80,7 @@
           </div>
 
           <div class="col-lg-3">
-            <article class="white-block">
-              <div class="top-cat-title">
-                <h3>Последнии новости </h3>
-                <p></p>
-              </div>
-              <ul class="top-cat-list">
-
-                  {% for news in new %}
-
-                <li>
-                  <a href="{% url 'new_post' news.id %}">
-                    <div class="top-cat-list__title">
-                     {{ news.heading }}
-                    </div>
-                    <div class="top-cat-list__subtitle">
-                      {{ news.data }}
-                    </div>
-                  </a>
-            {% endfor %}
-              </ul>
-            </article>
+            {% include 'manager/show_news.html' %}
           </div>
         </div>
       </div>

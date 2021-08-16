@@ -1,0 +1,24 @@
+
+
+     <article class="white-block">
+              <div class="top-cat-title">
+                <h3>Последнии новости </h3>
+                <p></p>
+              </div>
+              <ul class="top-cat-list">
+
+                  {% for news in new %}
+
+                <li>
+                  <a href="{% url 'new_post' news.id %}">
+                    <div class="top-cat-list__title">
+                     {{ news.heading }}
+                    </div>
+                    <div class="top-cat-list__subtitle">
+                       {{ news.name }} <br>
+                      {{ news.data }}
+                    </div>
+                  </a>
+                  {% endfor %}
+              </ul>
+            </article>
