@@ -4728,7 +4728,7 @@ label {
 
 .qvant:hover
 {
-  transition: 0.2s all;
+
   box-shadow: 10px 25px 310px rgba(160, 163, 189, 0.9);
   transition: 1s all;
 }
@@ -4744,7 +4744,7 @@ label {
 .qvant:hover .zag
 {
   display: block;
-  transition: 3s all;
+  transition: 1s all;
 }
 
 .zag
