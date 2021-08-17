@@ -4716,3 +4716,149 @@ label {
 
 }
 
+.qvant
+{
+    margin: 30px 20px;
+   color: white;
+    float: left;
+    text-align: center;
+    box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.9);
+   transition: 0.2s all;
+}
+
+.qvant:hover
+{
+  transition: 0.2s all;
+  box-shadow: 10px 25px 310px rgba(160, 163, 189, 0.9);
+  transition: 1s all;
+}
+
+.zag:hover
+{
+ color: white;
+  opacity: 1; /* Значение прозрачности */
+  transition: 0.5s all;
+  font-weight: bold;
+}
+
+.qvant:hover .zag
+{
+  display: block;
+  transition: 3s all;
+}
+
+.zag
+{
+   color: #2200c4;
+  transition: 3s all;
+  background: rgba(44, 129, 246, 0.8);
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: none;
+  font-size: 20px;
+  padding-top: 20%;
+  transition: 3s all;
+}
+
+
+.qvant_aero
+{
+
+    background-image: url(../img/qvant/aero.png);
+     width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    transition: 1s all;
+
+}
+
+.qvant_cosmo
+{
+    background-image: url(../img/qvant/cosmo.png);
+       width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    transition: 1s all;
+}
+
+.qvant_bio
+{
+    background-image: url(../img/qvant/bio.png);
+     width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+  transition: 1s all;
+}
+
+
+.qvant_geo
+{
+    background-image: url(../img/qvant/geo.png);
+     width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+     background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+  transition: 1s all;
+}
+
+
+.qvant_it
+{
+    background-image: url(../img/qvant/it.png);
+    width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+     background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+  transition: 1s all;
+}
+
+.qvant_prom
+{
+    background-image: url(../img/qvant/prom.png);
+      width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+     background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+  transition: 1s all;
+}
+
+.qvant_prom_disign
+{
+   background-image: url(../img/qvant/promdis.png);
+   width: 230px;
+   height: 150px;
+    background-repeat: no-repeat;
+     background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+  transition: 1s all;
+
+}
+.qvant_vr
+{
+   background-image: url(../img/qvant/Vr.png);
+      width: 230px;
+    height: 150px;
+    background-repeat: no-repeat;
+     background-size: 90%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+  transition: 1s all;
+
+}

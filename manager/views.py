@@ -443,6 +443,32 @@ def add_news(request):
     return render(request, 'manager/add_news.html', data)
 
 
+
+
+
+
+def course(request):
+    data={}
+    data.update(init_news(request))
+
+    return render(request, 'manager/course.html', data)
+
+
+
+def info_course(request,name):
+    data={}
+    data.update(init_news(request))
+    qv= qvant.objects.get(name=name)
+    #print(qv.body)
+    data['qv'] = qv
+    return render(request, 'manager/info_course.html', data)
+
+
+
+
+
+
+
 def edit_course(request,id):
     data={}
 

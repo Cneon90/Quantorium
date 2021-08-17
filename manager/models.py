@@ -83,8 +83,13 @@ class claim(models.Model):
         return self.name
 
 
+class qvant(models.Model):
+    name = models.CharField(max_length=30, blank=True)
+    zag =  models.CharField(max_length=200, blank=True)
+    body = models.TextField()
 
-
+    def __str__(self):
+        return self.name
 
 
 #Добавляем в админку
@@ -95,3 +100,4 @@ admin.site.register(Parent)
 admin.site.register(personal)
 admin.site.register(novelty)
 admin.site.register(claim)
+admin.site.register(qvant)
