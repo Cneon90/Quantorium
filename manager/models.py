@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 
+type_course= (
+    ('1', 'Квантум'),
+    ('2', 'Курс'),
+
+)
 
 
 # Расширяем класс юзер(дополнительные данные, после регистрации)
@@ -44,22 +49,21 @@ class personal(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=30, blank=True)
+    zag = models.CharField(max_length=200, blank=True)
+    body = models.TextField(null=True, blank=True)
     data_create = models.DateField(null=True, blank=True)
+    type_cours = models.CharField(max_length=1, choices=type_course, null=True)
     def __str__(self):
         return self.name
 
-type_course= (
-    ('R', 'Платные'),
-    ('B', 'Бесплатные'),
 
-)
 
 class Group(models.Model):
     g_user = models.ManyToManyField(User)
     g_name = models.CharField(max_length=30, blank=True)
     prepod = models.ForeignKey(personal, on_delete=models.CASCADE,null=True)  # Привязываем к модели юзер
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Привязываем к модели юзер
-    type_cours= models.CharField(max_length=1, choices=type_course,null=True)
+
     def __str__(self):
         return self.g_name
 
@@ -75,21 +79,14 @@ class novelty(models.Model):
 
 
 class claim(models.Model):
-    name =   models.ForeignKey(User, on_delete=models.CASCADE, null=True)#ManyToManyField(User)  # Привязываем к модели юзер
-    course = models.ManyToManyField(Course)   #ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Привязываем к модели курс
+    user =   models.ForeignKey(User, on_delete=models.CASCADE, null=True)#ManyToManyField(User)  # Привязываем к модели юзер
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)#ManyToManyField(User)(Course)   #ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Привязываем к модели курс
+    data = models.DateField(null=True, blank=True)
+    type_cours = models.CharField(max_length=1, choices=type_course, null=True)
     status = models.CharField(max_length=30,  null=True)
 
-    def __str__(self):
-        return self.name
 
 
-class qvant(models.Model):
-    name = models.CharField(max_length=30, blank=True)
-    zag =  models.CharField(max_length=200, blank=True)
-    body = models.TextField()
-
-    def __str__(self):
-        return self.name
 
 
 #Добавляем в админку
@@ -100,4 +97,4 @@ admin.site.register(Parent)
 admin.site.register(personal)
 admin.site.register(novelty)
 admin.site.register(claim)
-admin.site.register(qvant)
+

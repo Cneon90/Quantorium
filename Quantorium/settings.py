@@ -147,3 +147,5 @@ EMAIL_USE_SSL = False
 
 #column new Количество новостей в колонке с права
 NEWS_COLUMN = 5
+#Количество заявок которые можно подавать
+COUNT_ZAIVOK = 2

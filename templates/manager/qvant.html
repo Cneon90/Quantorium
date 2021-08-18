@@ -4,9 +4,12 @@
   {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
 {% endblock %}
 
+{% block qvant_activ %}
+ active
+{% endblock %}
 
 {% block namepage %}
-      {{ qv.zag }}
+      Курсы
 {% endblock %}
 
 
@@ -20,15 +23,71 @@
         <div class="row">
           <div class="col-lg-9">
               <div class="text">
-                  <div class="text">
-
-                    {{ qv.body }}
-
+                  Программы Кванториума предназначены для школьников с 5 по 11 класс. Успевайте попасть на бесплатное обучение в любом интересующем квантуме.
               </div>
+
+              <div class="qvant qvant_aero">
+                   <a href="{% url 'info_qvant' "aero" %}">
+                    <div class="zag">Узнать подробнее</div>
+                   </a>
               </div>
+
+
+              <div class="qvant qvant_cosmo">
+                   <a href="{% url 'info_qvant' "cosmo" %}">
+                    <div class="zag">Узнать подробнее</div>
+              </div>
+
+
+              <div class="qvant qvant_bio">
+                   <a href="{% url 'info_qvant' "bio" %}">
+                    <div class="zag">Узнать подробнее</div>
+                    </a>
+              </div>
+
+
+              <div class="qvant qvant_geo">
+                   <a href="{% url 'info_qvant' "geo" %}">
+                    <div class="zag">Узнать подробнее</div>
+
+                    </a>
+              </div>
+
+              <div class="qvant qvant_it">
+                   <a href="{% url 'info_qvant' "it" %}">
+                    <div class="zag">Узнать подробнее</div>
+
+                    </a>
+              </div>
+
+                <div class="qvant qvant_prom">
+                   <a href="{% url 'info_qvant' "prom" %}">
+                    <div class="zag">Узнать подробнее</div>
+
+                    </a>
+              </div>
+
+             <div class="qvant qvant_vr">
+                   <a href="{% url 'info_qvant' "vr" %}">
+                    <div class="zag">Узнать подробнее</div>
+
+                    </a>
+              </div>
+
+
+               <div class="qvant qvant_prom_disign">
+                   <a href="{% url 'info_qvant' "design" %}">
+                    <div class="zag">Узнать подробнее</div>
+
+                    </a>
+              </div>
+        <hr>
 
           </div>
-          <div class="col-lg-3">
+
+
+
+            <div class="col-lg-3">
                {% include 'manager/show_news.html' %}
           </div>
         </div>

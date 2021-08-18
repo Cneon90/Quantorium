@@ -443,26 +443,83 @@ def add_news(request):
     return render(request, 'manager/add_news.html', data)
 
 
-
-
-
-
 def course(request):
     data={}
     data.update(init_news(request))
-
+    data['posts'] = Course.objects.filter(type_cours='2')
     return render(request, 'manager/course.html', data)
 
 
 
-def info_course(request,name):
+
+
+def course_qvant(request):
     data={}
     data.update(init_news(request))
-    qv= qvant.objects.get(name=name)
+
+    return render(request, 'manager/qvant.html', data)
+
+
+
+def info_qvant(request,name):
+    data={}
+    data.update(init_news(request))
+    qv = Course.objects.get(name=name)
+
+    if request.method == 'POST':
+        count = claim.objects.all().filter(user=request.user.id, type_cours='1')  # Смотрим количество заявок от данного пользователя
+        qvant_ =claim.objects.all().filter(user=request.user.id, type_cours='1')
+        print(count)
+        if qvant_ == 1:
+            data['error'] = "Уже есть заявка"
+        else:
+            if (count.count() < 1):  # Если количество записей больше двух (или изменено в настройках)
+                zaivka = claim.objects.create()
+                zaivka.user = User.objects.get(id=request.user.id)
+                zaivka.data = datetime.now().date()
+                zaivka.course = Course.objects.get(name=name)
+                zaivka.type_cours = '1'
+                zaivka.status = 1
+                zaivka.save()
+            else:
+                data['max'] = "Больше нельзя"
+        # print(qv.body)
+    data['qv'] = qv
+    data['user'] = request.user
+
+
+    return render(request, 'manager/info_qvant.html', data)
+
+
+
+def info_course(request,id):
+    data={}
+    data.update(init_news(request))
+    qv= Course.objects.get(id=id)
+
+    if request.method=='POST':
+            count=claim.objects.all().filter(user=request.user.id,type_cours='2') #Смотрим количество заявок от данного пользователя
+            cours_doubl = claim.objects.all().filter(user=request.user.id,course=id) #Смотрим, что бы такой (с таким же курсом) заявки не было
+            print(cours_doubl.count())
+            if (cours_doubl.count()==1):#Если уже есть заявка
+                data['doubl'] = "Уже отправлена"
+            else: #Иначе проверяем and (cours_doubl.count() < 1
+                if (count.count() < settings.COUNT_ZAIVOK): # Если количество записей больше двух (или изменено в настройках)
+                    zaivka = claim.objects.create()
+                    zaivka.user=User.objects.get(id=request.user.id)
+                    zaivka.data = datetime.now().date()
+                    zaivka.course=Course.objects.get(id=id)
+                    zaivka.status=1
+                    zaivka.type_cours='2'
+                    zaivka.save()
+                else:
+                     data['max'] = "Больше нельзя"
+
     #print(qv.body)
     data['qv'] = qv
-    return render(request, 'manager/info_course.html', data)
+    data['user'] = request.user
 
+    return render(request, 'manager/info_cours.html', data)
 
 
 
@@ -471,7 +528,25 @@ def info_course(request,name):
 
 def edit_course(request,id):
     data={}
+    form = add_cours()
+    data['form'] = form
 
+    if request.method == "POST":
+        form = add_cours(request.POST)
+        if form.is_valid():
+            dataform = form.cleaned_data
+
+            try:
+                cour = Course.objects.get(name=dataform['name'])
+                print("exces")
+                data['error'] = 'Такой курс уже есть'
+            except Course.DoesNotExist:
+                cour = Course.objects.create(name=dataform['name'])
+                cour.type_cours = '2'  # Указываем что это не квант а курс
+                cour.save()
+
+    data.update(init_news(request))
+    data['courses'] = Course.objects.all()
     return render(request, 'manager/add_course.html', data)
 
 
@@ -506,6 +581,7 @@ def add_course(request):
                 data['error'] = 'Такой курс уже есть'
             except Course.DoesNotExist:
                 cour = Course.objects.create(name=dataform['name'])
+                cour.type_cours='2'#Указываем что это не квант а курс
                 cour.save()
 
     data.update(init_news(request))
@@ -519,7 +595,12 @@ def add_course(request):
 
 
 
-
+def bid(request):
+    data={}
+    data.update(init_news(request))
+    data['zaivki'] = claim.objects.filter(user_id=request.user.id)
+    print(data['zaivki'])
+    return render(request, 'manager/zaivki.html', data)
 
 
 

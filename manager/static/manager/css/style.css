@@ -3422,6 +3422,8 @@ label {
         box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.9);
     }
 
+
+
 .name
 {
 
@@ -4724,6 +4726,9 @@ label {
     text-align: center;
     box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.9);
    transition: 0.2s all;
+     width: 230px;
+    height: 150px;
+
 }
 
 .qvant:hover
@@ -4731,6 +4736,7 @@ label {
 
   box-shadow: 10px 25px 310px rgba(160, 163, 189, 0.9);
   transition: 1s all;
+
 }
 
 .zag:hover
@@ -4749,7 +4755,7 @@ label {
 
 .zag
 {
-   color: #2200c4;
+  color: #2200c4;
   transition: 3s all;
   background: rgba(44, 129, 246, 0.8);
   text-align: center;
@@ -4758,9 +4764,38 @@ label {
   display: none;
   font-size: 20px;
   padding-top: 20%;
+
+}
+
+.course_zag
+{
+  color: #2200c4;
+  transition: 3s all;
+
+  text-align: center;
+  height: 100%;
+  width: 100%;
+
+  font-size: 20px;
+  padding-top: 20%;
   transition: 3s all;
 }
 
+.course_zag:hover
+{
+ color: white;
+  opacity: 1; /* Значение прозрачности */
+  transition: 0.5s all;
+  font-weight: bold;
+  background: rgba(44, 129, 246, 0.8);
+
+}
+
+.qvant:hover .course_zag
+{
+  display: block;
+  transition: 1s all;
+}
 
 .qvant_aero
 {
@@ -4779,7 +4814,7 @@ label {
 .qvant_cosmo
 {
     background-image: url(../img/qvant/cosmo.png);
-       width: 230px;
+    width: 230px;
     height: 150px;
     background-repeat: no-repeat;
     background-size: 90%;
@@ -4861,4 +4896,18 @@ label {
     background-position-y: 50%;
   transition: 1s all;
 
+}
+
+.game
+{
+  background-image: url(../img/svg/Bulk/Game.svg);
+  width: 24px;
+  height: 24px;
+}
+
+.zaiv
+{
+   background-image: url(../img/svg/Bulk/AddUser.svg);
+  width: 24px;
+  height: 24px;
 }

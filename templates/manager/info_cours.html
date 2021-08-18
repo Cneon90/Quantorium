@@ -4,12 +4,9 @@
   {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
 {% endblock %}
 
-{% block courseactive %}
- active
-{% endblock %}
 
 {% block namepage %}
-      Курсы
+      {{ qv.zag }}
 {% endblock %}
 
 
@@ -23,29 +20,34 @@
         <div class="row">
           <div class="col-lg-9">
               <div class="text">
-                  Программы Кванториума предназначены для школьников с 5 по 11 класс. Успевайте попасть на бесплатное обучение в любом интересующем квантуме.
-              </div>
+                  <div class="text">
 
-
-              {% for post in posts %}
-              <div class="qvant">
-                    <a href="{% url 'info_course' post.id %}">
-                    <div class="course_zag">  {{ post.name }}</div>
-                   </a>
+                    {{ qv.body }}
 
               </div>
-            {% endfor %}
+                  <br>
+                  {% if user.is_anonymous %}
+                      Необходимо авторизоваться, и заполнить профиль, что бы была возможность сгенерировать договор
+                      {% else %}
+                         <br>
+                            <br>
+                            <br>
+                      {{ max }}
+                      {{ doubl }}
+                       <form  method="post">
+                            {% csrf_token %}
 
+                              <button type="submit"> Отправить заявку </button>
 
-        <hr>
+                      </form>
+                  {% endif %}
+              </div>
+
 
 
 
           </div>
-
-
-
-            <div class="col-lg-3">
+          <div class="col-lg-3">
                {% include 'manager/show_news.html' %}
           </div>
         </div>

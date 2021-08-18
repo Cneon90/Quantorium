@@ -20,10 +20,12 @@ urlpatterns = [
 
     #Course
     path('add_course/', views.add_course, name='add_course'),
-    path('edit_course/<int:id_profile>', views.edit_course, name='edit_course'),
+    path('edit_course/<int:id>', views.edit_course, name='edit_course'),
     path('delete_course/<int:id_profile>', views.delete_course, name='delete_course'),
+    path('course_qvant/', views.course_qvant, name='course_qvant'),
     path('course/', views.course, name='course'),
-    path('info_course/<slug:name>', views.info_course, name='info_course'),
+    path('info_course/<int:id>', views.info_course, name='info_course'),
+    path('info_qvant/<slug:name>', views.info_qvant, name='info_qvant'),
 
     #news
     path('edit_news/<int:id_post>', views.edit_news, name='edit_news'),                  # Д
@@ -36,6 +38,8 @@ urlpatterns = [
     path('profile/<int:profileid>', views.profile, name='profile'),                  #
     path('profile/<name>', views.myprofile, name='myprofile'),                  #
 
+
+    path('bid/', views.bid, name='bid'),
 
     #api
     path('api/login', views.api_login, name='api/login'),

@@ -4,12 +4,12 @@
   {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
 {% endblock %}
 
-{% block courseactive %}
+{% block zaiv_activ %}
  active
 {% endblock %}
 
 {% block namepage %}
-      Курсы
+      {{ user.username }}
 {% endblock %}
 
 
@@ -23,30 +23,21 @@
         <div class="row">
           <div class="col-lg-9">
               <div class="text">
-                  Программы Кванториума предназначены для школьников с 5 по 11 класс. Успевайте попасть на бесплатное обучение в любом интересующем квантуме.
+                  <div class="text">
+
+
+            тут ваши заявки
+                <hr>
+                    {% for ziv in zaivki %}
+                      {{ ziv.course }} <a href="#">  Отменить  </a> <hr>
+                     {% endfor %}
+
               </div>
-
-
-              {% for post in posts %}
-              <div class="qvant">
-                    <a href="{% url 'info_course' post.id %}">
-                    <div class="course_zag">  {{ post.name }}</div>
-                   </a>
-
               </div>
-            {% endfor %}
-
-
-        <hr>
-
-
 
           </div>
-
-
-
-            <div class="col-lg-3">
-               {% include 'manager/show_news.html' %}
+          <div class="col-lg-3">
+            {% include 'manager/show_news.html' %}
           </div>
         </div>
       </div>
