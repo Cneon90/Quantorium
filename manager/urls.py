@@ -24,8 +24,10 @@ urlpatterns = [
     path('delete_course/<int:id_profile>', views.delete_course, name='delete_course'),
     path('course_qvant/', views.course_qvant, name='course_qvant'),
     path('course/', views.course, name='course'),
+
+
     path('info_course/<int:id>', views.info_course, name='info_course'),
-    path('info_qvant/<slug:name>', views.info_qvant, name='info_qvant'),
+    path('info_qvant/<int:id>', views.info_qvant, name='info_qvant'),
 
     #news
     path('edit_news/<int:id_post>', views.edit_news, name='edit_news'),                  # Д

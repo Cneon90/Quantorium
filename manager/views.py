@@ -461,10 +461,10 @@ def course_qvant(request):
 
 
 
-def info_qvant(request,name):
+def info_qvant(request,id):
     data={}
     data.update(init_news(request))
-    qv = Course.objects.get(name=name)
+    qv = Course.objects.get(id=id)
 
     if request.method == 'POST':
         count = claim.objects.all().filter(user=request.user.id, type_cours='1')  # Смотрим количество заявок от данного пользователя
@@ -599,7 +599,16 @@ def bid(request):
     data={}
     data.update(init_news(request))
     data['zaivki'] = claim.objects.filter(user_id=request.user.id)
-    print(data['zaivki'])
+    if data['zaivki'].count() ==0:
+        data['error'] = 1
+    if request.GET.get('id'):
+        try:
+            za=claim.objects.get(id=request.GET['id'])
+            za.delete()
+        except claim.DoesNotExist:
+            print("error")
+
+
     return render(request, 'manager/zaivki.html', data)
 
 

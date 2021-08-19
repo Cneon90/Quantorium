@@ -22,20 +22,32 @@
 
         <div class="row">
           <div class="col-lg-9">
-              <div class="text">
-                  <div class="text">
+             <div class="text">
+             {% if not error == 1  %}
+                    <table class="tabl_zaiv">
+                            <tr>
+                                <th class="name">Курс</th>
 
+                                <th class="name"> Отменить </th>
+                             </tr>
 
-            тут ваши заявки
-                <hr>
-                    {% for ziv in zaivki %}
-                      {{ ziv.course }} <a href="#">  Отменить  </a> <hr>
-                     {% endfor %}
+                  {% for ziv in zaivki %}
+                        <tr>
+                          <td class="names2">  <a href=""> {{ ziv.course }}  </a>   </td>
+
+                          <td class="names3">  <a href="?id={{ ziv.id }}">  Отменить  </a>   </td>
+                        </tr>
+                            {% endfor %}
+                 </table>
+             {% else %}
+                    <h1> У вас нет заявок</h1>
+
+             {% endif %}
+
 
               </div>
-              </div>
+            </div>
 
-          </div>
           <div class="col-lg-3">
             {% include 'manager/show_news.html' %}
           </div>
