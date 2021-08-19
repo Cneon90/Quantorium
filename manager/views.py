@@ -477,7 +477,7 @@ def info_qvant(request,id):
                 zaivka = claim.objects.create()
                 zaivka.user = User.objects.get(id=request.user.id)
                 zaivka.data = datetime.now().date()
-                zaivka.course = Course.objects.get(name=name)
+                zaivka.course = Course.objects.get(id=id)
                 zaivka.type_cours = '1'
                 zaivka.status = 1
                 zaivka.save()
