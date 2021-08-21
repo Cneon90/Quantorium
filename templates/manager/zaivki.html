@@ -27,14 +27,14 @@
                     <table class="tabl_zaiv">
                             <tr>
                                 <th class="name">Курс</th>
-
-                                <th class="name"> Отменить </th>
+                                <th class="name">Статус</th>
+                                <th class="name"> Действие </th>
                              </tr>
 
                   {% for ziv in zaivki %}
                         <tr>
                           <td class="names2">  <a href=""> {{ ziv.course }}  </a>   </td>
-
+                          <td class="names2">  <a href=""> {{ ziv.status }}  </a>   </td>
                           <td class="names3">  <a href="?id={{ ziv.id }}">  Отменить  </a>   </td>
                         </tr>
                             {% endfor %}

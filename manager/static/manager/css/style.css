@@ -4920,7 +4920,7 @@ label {
 
 .tabl_zaiv td
 {
-   min-width:400px;
+   min-width:300px;
    text-align: center;
 
 }
@@ -4935,4 +4935,25 @@ label {
     background-position-x: 50%;
     background-position-y: 50%;
   transition: 1s all;
+}
+
+.btn
+{
+  background: rgb(15, 47, 255);
+  text-align: center;
+  padding: 10px;
+  margin-left: 40%;
+  color: #cccccc;
+   box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.9);
+}
+
+.btn:hover
+{
+  color: white;
+  box-shadow: 0px 5px 10px rgba(160, 163, 189, 1);
+}
+
+.darkmode .btn
+{
+  background: rgba(203, 30, 70, 0.93);
 }

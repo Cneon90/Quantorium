@@ -59,3 +59,5 @@ class add_new_post(forms.Form):
 class add_cours(forms.Form):
     name = forms.CharField(label='Название курса', widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Название курса'}))
 
+class group_edit(forms.Form):
+    name = forms.CharField(label='Название курса', widget=forms.Select())

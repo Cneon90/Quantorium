@@ -43,21 +43,54 @@
         <form method="post">
               {% csrf_token %}
                         Курс:
-                  <select name="item_id">
+                     <select name="item_id" >
                   {% for cours in cours %}
+                         <option value="" selected disabled hidden>Выберите курс</option>
                         <option value="{{ cours.id }}">{{ cours.name }}</option>
                   {% endfor %}
 
                   </select>
+         <br>
+              <br>
+              <br>
+              <hr>
+            Выбрать преподавателя:
                     <br>
                     <br>
-                  <button type="submit"> Сохранить </button>
-</form>
+                  <button type="submit" class="btn"> Сохранить </button>
+        </form>
               </div>
+
               </div>
 
           </div>
-            <div class="col-lg-5"> Список подавших заявки </div>
+            <div class="col-lg-5"> Список подавших заявки
+         <div class="text">
+        <div class="group_list">
+           <table>
+                            <tr>
+                                <th class="name">Имя</th>
+                                <th class="name"> Курс </th>
+                                <th class="name"> Принять </th>
+                             </tr>
+
+                   {% for user in zaivki %}
+                        <tr>
+                          <td class="names2">  <a href="#">   </a>  {{ user.user.username }} </td>
+                          <td class="names2">  <a href="#"> {{ user.course.name }} </a>   </td>
+                          <td class="names3">  <a href="?course="> Принять </a>    </td>
+                        </tr>
+                            {% endfor %}
+                 </table>
+
+            </div>
+        </div>
+
+
+
+
+
+            </div>
           <div class="col-lg-3">
             {% include 'manager/show_news.html' %}
           </div>

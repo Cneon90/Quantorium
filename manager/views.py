@@ -318,14 +318,27 @@ def profile_group(request,id_profile):
     data={}
 
 
+    if request.GET.get('course'):
+        print(request.GET['course'])
+
+    #_gr = Group.objects.get(id=id_profile)
+    #print(_gr.course)
+
     data.update(init_news(request))
     gr = Group.objects.get(id=id_profile)
+    data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=gr.course.id))
     gr.g_user.add(User.objects.get(id=10))
     data['cours'] = Course.objects.all()
-    data['group'] = gr
+
+    #data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=Group.course.id))
     if request.method=="POST":
-        print(request.POST['item_id'])
+        data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=request.POST['item_id']))
+
+        gr = Group.objects.get(id=id_profile)
         gr.course = Course.objects.get(id=request.POST['item_id'])
+
+        gr.save()
+    data['group'] = gr
     return render(request, 'manager/profile_group.html', data)
 
 
