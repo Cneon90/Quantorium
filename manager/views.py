@@ -326,16 +326,24 @@ def profile_group(request,id_profile):
 
     data.update(init_news(request))
     gr = Group.objects.get(id=id_profile)
-    data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=gr.course.id))
+    if not gr.course == None:
+        data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=gr.course.id))
     gr.g_user.add(User.objects.get(id=10))
     data['cours'] = Course.objects.all()
 
     #data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=Group.course.id))
     if request.method=="POST":
-        data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=request.POST['item_id']))
+        print("test")
+        print(type(request.POST['item_id']))
+        try:
+            data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=request.POST['item_id']))
+            gr = Group.objects.get(id=id_profile)
+            gr.course = Course.objects.get(id=request.POST['item_id'])
 
-        gr = Group.objects.get(id=id_profile)
-        gr.course = Course.objects.get(id=request.POST['item_id'])
+        except Course.DoesNotExist:
+            print("sdf")
+
+
 
         gr.save()
     data['group'] = gr

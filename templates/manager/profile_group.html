@@ -45,7 +45,7 @@
                         Курс:
                      <select name="item_id" >
                   {% for cours in cours %}
-                         <option value="" selected disabled hidden>Выберите курс</option>
+                         <option value="0" selected hidden>Выберите курс</option>
                         <option value="{{ cours.id }}">{{ cours.name }}</option>
                   {% endfor %}
 
