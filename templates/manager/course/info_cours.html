@@ -6,7 +6,7 @@
 
 
 {% block namepage %}
-      {{ user.username }}
+      {{ qv.zag }}
 {% endblock %}
 
 
@@ -22,32 +22,33 @@
               <div class="text">
                   <div class="text">
 
-
-
-
-                          Имя:      {{ user.username }} <br>
-                          маил:  {{ user.email }}<br>
-                          Город: {{ user.profile.Location }}<br>
-                          Номер школы: {{ user.profile.School_name }}<br>
-                          Класс: {{ user.profile.School_class }}<br>
-                          День рождение: {{ user.profile.Birth_date }}<br>
-                          серия паспорта     {{ user.profile.Passport_series }}<br>
-                          Номер паспорта     {{ user.profile.Passport_number }}<br>
-                          Кем выдан:     {{ user.profile.Passport_received }}<br>
-                          Номер телефона: {{ user.profile.Location }}<br>
-
-                       <br>
-                       <br>
-                      <a href="?newadmin=1"> Сделать Админом</a>
-
-
+                    {{ qv.body }}
 
               </div>
+                  <br>
+                  {% if user.is_anonymous %}
+                      Необходимо авторизоваться, и заполнить профиль, что бы была возможность сгенерировать договор
+                      {% else %}
+                         <br>
+                            <br>
+                            <br>
+                      {{ max }}
+                      {{ doubl }}
+                       <form  method="post">
+                            {% csrf_token %}
+
+                              <button type="submit" class="btn"> Отправить заявку </button>
+
+                      </form>
+                  {% endif %}
               </div>
+
+
+
 
           </div>
           <div class="col-lg-3">
-            {% include 'manager/show_news.html' %}
+               {% include 'manager/news/show_news.html' %}
           </div>
         </div>
       </div>

@@ -8,6 +8,23 @@ type_course= (
 
 )
 
+day= (
+    ('Понедельник', 'Понедельник'),
+    ('Вторник', 'Вторник'),
+    ('Среда', 'Среда'),
+    ('Четверг', 'Четверг'),
+    ('Пятница', 'Пятница'),
+    ('Суббота', 'Суббота'),
+)
+
+
+class timetable(models.Model):
+    name = models.CharField(max_length=29, blank=True)
+    day = models.CharField(max_length=12, choices=day, null=True)
+    time = models.TimeField(null=True, blank=True)
+    def __str__(self):
+        return self.name
+
 
 # Расширяем класс юзер(дополнительные данные, после регистрации)
 class Profile(models.Model):
@@ -63,7 +80,10 @@ class Group(models.Model):
     g_name = models.CharField(max_length=30, blank=True)
     prepod = models.ForeignKey(personal, on_delete=models.CASCADE,null=True)  # Привязываем к модели юзер
     course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)  # Привязываем к модели юзер
-
+    data_creat = models.DateField(null=True, blank=True)
+    data_close = models.DateField(null=True, blank=True)
+    count_peopl = models.IntegerField(null=True, blank=True)
+    day_work =  models.ManyToManyField(timetable)
     def __str__(self):
         return self.g_name
 
@@ -90,6 +110,8 @@ class claim(models.Model):
 
 
 #Добавляем в админку
+
+admin.site.register(timetable)
 admin.site.register(Group)
 admin.site.register(Course)
 admin.site.register(Profile)

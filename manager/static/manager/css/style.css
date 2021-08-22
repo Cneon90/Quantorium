@@ -4947,6 +4947,17 @@ label {
    box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.9);
 }
 
+.btn-1
+{
+  background: rgb(15, 47, 255);
+  text-align: center;
+  padding: 10px;
+  color: #cccccc;
+  margin: 10px;
+  box-shadow: 0px 5px 10px rgba(160, 163, 189, 0.9);
+
+}
+
 .btn:hover
 {
   color: white;
@@ -4956,4 +4967,31 @@ label {
 .darkmode .btn
 {
   background: rgba(203, 30, 70, 0.93);
+}
+
+.newses
+{
+    background-image: url(../img/svg/Bulk/Danger.svg);
+  width: 24px;
+  height: 24px;
+
+}
+
+.group_ras td
+{
+   min-width: 200px;
+}
+
+.menu_group
+{
+   background: rgba(3, 15, 253, 0.46);
+   color: #cccccc;
+   padding: 0.1px;
+   margin: 30px 0px;
+
+}
+
+.center
+{
+  text-align: center;
 }

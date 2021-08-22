@@ -61,3 +61,8 @@ class add_cours(forms.Form):
 
 class group_edit(forms.Form):
     name = forms.CharField(label='Название курса', widget=forms.Select())
+
+class time_table(forms.Form):
+    #Name = forms.CharField(label='Название группы', widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Введите название группы'}))
+    day  = forms.DateField(label='День занятия', widget=forms.DateInput(attrs={'type':'date', }))
+    time = forms.TimeField(label='День занятия', widget=forms.TimeInput(attrs={'type':'time', }))

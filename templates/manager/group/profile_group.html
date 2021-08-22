@@ -6,7 +6,7 @@
 
 
 {% block namepage %}
-      {{ qv.zag }}
+    Группа "{{ group.g_name }}"
 {% endblock %}
 
 
@@ -17,38 +17,62 @@
       <div class="container">
         <h2 class="main-title"></h2>
 
+
+   {% include 'manager/group/menu_group' %}
+
         <div class="row">
           <div class="col-lg-9">
               <div class="text">
                   <div class="text">
 
-                    {{ qv.body }}
+                        Название: {{ group.g_name }} <br>
+
+                        Преподаватель: {{ group.prepod }} <br>
+                        Курс: {{ group.course }} <br>
+
+                        Ученики: <br>
+                       {% for user in group.g_user.all %} <br>
+                      {{ user }} {{ group.user_set.id }}
+                         {% endfor %}
+
+
+                       <br>
+                       <br>
+
+        <form method="post">
+              {% csrf_token %}
+                    {{ error }}
+                        <br>
+                        <br>
+                        Курс:
+                  <select name="item_id" >
+                  {% for cours in cours %}
+                         <option value="0" selected hidden>Выберите курс</option>
+                        <option value="{{ cours.id }}">{{ cours.name }}</option>
+                  {% endfor %}
+
+                  </select>
+         <br>
+              <br>
+              <br>
+
+            Выбрать преподавателя:
+         <br>
+         <br>
+         <br>
+         <br>
+                  <button type="submit" class="btn"> Сохранить </button>
+        </form>
+
+        <hr>
+              </div>
 
               </div>
-                  <br>
-                  {% if user.is_anonymous %}
-                      Необходимо авторизоваться, и заполнить профиль, что бы была возможность сгенерировать договор
-                      {% else %}
-                         <br>
-                            <br>
-                            <br>
-                      {{ max }}
-                      {{ doubl }}
-                       <form  method="post">
-                            {% csrf_token %}
-
-                              <button type="submit" class="btn"> Отправить заявку </button>
-
-                      </form>
-                  {% endif %}
-              </div>
-
-
-
 
           </div>
+
           <div class="col-lg-3">
-               {% include 'manager/show_news.html' %}
+            {% include 'manager/news/show_news.html' %}
           </div>
         </div>
       </div>

@@ -13,9 +13,13 @@ urlpatterns = [
     url(r'^login/$', views.user_login, name='login'),
     #path('accounts/', include('django.contrib.auth.urls')),                   #
     path('reg/', views.registr, name='reg'),                  #
-                    # т
+
+
+    #group
+    path('create_group/', views.create_group, name='create_group'),                  #
     path('group/', views.group, name='group'),                  #
     path('profile_group/<int:id_profile>', views.profile_group, name='profile_group'),                  #
+    path('raspisanie/', views.raspisanie, name='raspisanie'),                  #
               # Д
 
     #Course

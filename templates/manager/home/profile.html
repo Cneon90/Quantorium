@@ -34,21 +34,20 @@
                           серия паспорта     {{ user.profile.Passport_series }}<br>
                           Номер паспорта     {{ user.profile.Passport_number }}<br>
                           Кем выдан:     {{ user.profile.Passport_received }}<br>
-                          Номер телефона: {{ user.profile.Phone }}<br>
-                          Возраст: {{ age }}
-                        <br>
-                        <br>
-                        <br>
-                      {%  if age < 14 %}
-                            <a href="#">  Добавить родителя </a>
-                      {% endif %}
+                          Номер телефона: {{ user.profile.Location }}<br>
+
+                       <br>
+                       <br>
+                      <a href="?newadmin=1"> Сделать Админом</a>
+
+
 
               </div>
               </div>
 
           </div>
           <div class="col-lg-3">
-               {% include 'manager/show_news.html' %}
+            {% include 'manager/news/show_news.html' %}
           </div>
         </div>
       </div>

@@ -1,0 +1,100 @@
+{% extends "manager/main.html" %}
+
+{% block bar %}
+  {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
+{% endblock %}
+
+{% block creat_groups %}
+ active
+{% endblock %}
+
+
+{% block namepage %}
+      <i class="fa fa-university" aria-hidden="true"></i> Группы
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        <h2 class="main-title"></h2>
+
+
+            {% include 'manager/group/menu_group' %}
+
+
+
+        <div class="row">
+            <div class="col-lg-9">
+
+         <div class="text">
+
+                    <div class="group_ras">
+            <table>
+                    <tr>
+                        <th class="name">Имя</th>
+                        <th class="name"> Направление </th>
+                        <th class="name"> Человек </th>
+                        <th class="name"> Расписание </th>
+
+
+
+                     </tr>
+            {% for groups in group  %}
+                <tr>
+                  <td class="names2">  <a href="{% url 'profile_group' groups.id %}  "> {{ groups.g_name }} </a>   </td>
+                  <td class="names2">  <a href="#"> {{ groups.course }} </a>   </td>
+                  <td class="names2 center">  <a href="#"> {{groups.g_user.count  }}/{{groups.count_peopl}} </a>   </td>
+                  <td class="names2">  <a href="#">
+
+                    {% for day in groups.day_work.all  %}
+                         {{ day.day }} {{ day.time }} <br>
+                  {% endfor %}
+                            <br>
+                            <a href="{% url "raspisanie"  %}groups.id"> Изменить </a>
+                  </a>   </td>
+
+
+                </tr>
+                    {% endfor %}
+            </table>
+
+
+
+
+          </div>
+         </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+            <div class="col-lg-3">
+            {% include 'manager/news/show_news.html' %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+{% endblock %}
+
+

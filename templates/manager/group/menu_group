@@ -1,0 +1,10 @@
+<div class="row">
+            <div class="col-lg-12">
+              <a class="btn-1" href="{% url 'group' %}"> Группы </a>   <a class="btn-1" href="{% url 'create_group' %}"> Изменить группу </a>  <a class="btn-1" href="{% url 'raspisanie' %}"> Расписание групп </a>
+
+
+                <hr class="menu_group">
+
+
+            </div>
+         </div>

@@ -13,6 +13,8 @@ from .forms import * #RegistrForm, LoginForm, settingg
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.models import User
+
+from .functional import _get_grpoup
 from .models import *
 from .functional import *
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -42,20 +44,18 @@ def index(request):
     data = {}
     data.update(init_news(request))
 
-    return render(request,'manager/index.html',data)
+    return render(request, 'manager/home/index.html', data)
 
 
 def statistic(request):
     data={}
-
     data.update(init_news(request))
-
     return render(request, 'manager/statistic.html', data)
 
 
 
 def reg(request):
-    return render(request, 'manager/reg.html', {"name": "name", "msg": "msg"})
+    return render(request, 'manager/home/reg.html', {"name": "name", "msg": "msg"})
 
 
 def user_login(request):
@@ -78,7 +78,7 @@ def user_login(request):
                 data['res'] = 'Неверный логин, или пароль'
     else:
         form = LoginForm()
-    return render(request, 'manager/login.html', {'form': form,"data":data})
+    return render(request, 'manager/home/login.html', {'form': form, "data":data})
 
 
 
@@ -110,7 +110,7 @@ def registr(request):
             data['res'] = form.errors.as_data()
             print(form.errors.as_data())
             # Рендаринг страницы
-            return render(request, 'manager/reg.html', data)
+            return render(request, 'manager/home/reg.html', data)
 
     else: # Иначе
         # Создаём форму
@@ -118,7 +118,7 @@ def registr(request):
         # Передаём форму для рендеринга
         data['form'] = form
         # Рендаринг страницы
-        return render(request, 'manager/reg.html', data)
+        return render(request, 'manager/home/reg.html', data)
 
 
 #Выход из системы
@@ -126,7 +126,7 @@ def logout_view(request):
     data = {}
     data['res'] = "Вышли"
     logout(request)
-    return render(request, 'manager/logout.html', data)
+    return render(request, 'manager/home/logout.html', data)
 
 
 #Пример отправки письма (удалить)
@@ -140,15 +140,10 @@ def mail(request):
         ['kirillkalita2@gmail.com'],
         fail_silently=True,#(True Страница загрузится даже если произошла ошибка) (false не загрузится)
     ))
-    return render(request, 'manager/index.html', data)
-
-
-
+    return render(request, 'manager/home/index.html', data)
 
 
 def setting(request):
-
-
     try:
         #Преобразование даты в строку, что бы отобразилось при загрузке
         test = request.user.profile.Birth_date.__str__()
@@ -214,8 +209,7 @@ def setting(request):
 
     data.update(init_news(request))
 
-    return render(request, 'manager/setting.html', data)
-
+    return render(request, 'manager/home/setting.html', data)
 
 
 
@@ -226,17 +220,18 @@ def myprofile(request,name):
     data['user'] = User.objects.get(username=name)
     data['age'] = calculate_age(data['user'].profile.Birth_date)
 
-    return render(request, 'manager/myprofile.html', data)
+    return render(request, 'manager/home/myprofile.html', data)
 
 
 def new_post(request,post):
     data = {}
     data.update(init_news(request))
-
     data['new_post'] = novelty.objects.get(pk=post)
 
 
-    return render(request, 'manager/new_post.html', data)
+    return render(request, 'manager/news/new_post.html', data)
+
+
 
 
 def profile(request,profileid):
@@ -265,7 +260,7 @@ def profile(request,profileid):
     # data['profile_id'] = profileid
     data['user'] = User.objects.get(pk=profileid)
 
-    return render(request, 'manager/profile.html', data)
+    return render(request, 'manager/home/profile.html', data)
 
 
 
@@ -275,7 +270,7 @@ def news(request):
     data={}
     data.update(init_news(request))
     data['new'] = novelty.objects.all().order_by('-data').order_by('-time')
-    return render(request, 'manager/news.html', data)
+    return render(request, 'manager/news/news.html', data)
 
 
 
@@ -307,7 +302,7 @@ def edit_news(request,id_post):
     data['post_data'] = edit.data
     data['post_time'] = edit.time
     data['form'] = form
-    return render(request, 'manager/add_news.html', data)
+    return render(request, 'manager/news/add_news.html', data)
 
 
 
@@ -316,45 +311,36 @@ def edit_news(request,id_post):
 
 def profile_group(request,id_profile):
     data={}
-
-
-    if request.GET.get('course'):
-        print(request.GET['course'])
-
-    #_gr = Group.objects.get(id=id_profile)
-    #print(_gr.course)
-
     data.update(init_news(request))
     gr = Group.objects.get(id=id_profile)
     if not gr.course == None:
         data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=gr.course.id))
-    gr.g_user.add(User.objects.get(id=10))
+
     data['cours'] = Course.objects.all()
 
     #data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=Group.course.id))
     if request.method=="POST":
         print("test")
-        print(type(request.POST['item_id']))
+
         try:
             data['zaivki'] = claim.objects.filter(course=Course.objects.get(id=request.POST['item_id']))
             gr = Group.objects.get(id=id_profile)
             gr.course = Course.objects.get(id=request.POST['item_id'])
-
         except Course.DoesNotExist:
+            data['error'] = "Выберите курс"
             print("sdf")
-
-
-
         gr.save()
+        return redirect('group')
+
     data['group'] = gr
-    return render(request, 'manager/profile_group.html', data)
+    return render(request, 'manager/group/profile_group.html', data)
 
 
 
 
 
 
-def group(request):
+def create_group(request):
     data={}
     data.update(init_news(request))
     """  # получение курсов для конкретоного пользователя 
@@ -414,7 +400,7 @@ def group(request):
                 new=Group.objects.create(g_name=dataform['Name'])
                 new.save()#Сохраняем
 
-    return render(request, 'manager/group.html', data)
+    return render(request, 'manager/group/create_group.html', data)
 
 
 def delete_news(request,id_post):
@@ -461,14 +447,14 @@ def add_news(request):
     data['all_news'] = all_news
 
 
-    return render(request, 'manager/add_news.html', data)
+    return render(request, 'manager/news/add_news.html', data)
 
 
 def course(request):
     data={}
     data.update(init_news(request))
     data['posts'] = Course.objects.filter(type_cours='2')
-    return render(request, 'manager/course.html', data)
+    return render(request, 'manager/course/course.html', data)
 
 
 
@@ -478,7 +464,7 @@ def course_qvant(request):
     data={}
     data.update(init_news(request))
 
-    return render(request, 'manager/qvant.html', data)
+    return render(request, 'manager/qvant/qvant.html', data)
 
 
 
@@ -509,7 +495,7 @@ def info_qvant(request,id):
     data['user'] = request.user
 
 
-    return render(request, 'manager/info_qvant.html', data)
+    return render(request, 'manager/qvant/info_qvant.html', data)
 
 
 
@@ -540,7 +526,7 @@ def info_course(request,id):
     data['qv'] = qv
     data['user'] = request.user
 
-    return render(request, 'manager/info_cours.html', data)
+    return render(request, 'manager/course/info_cours.html', data)
 
 
 
@@ -568,7 +554,7 @@ def edit_course(request,id):
 
     data.update(init_news(request))
     data['courses'] = Course.objects.all()
-    return render(request, 'manager/add_course.html', data)
+    return render(request, 'manager/course/add_course.html', data)
 
 
 
@@ -607,7 +593,7 @@ def add_course(request):
 
     data.update(init_news(request))
     data['courses'] = Course.objects.all()
-    return render(request, 'manager/add_course.html', data)
+    return render(request, 'manager/course/add_course.html', data)
 
 
 
@@ -630,19 +616,30 @@ def bid(request):
             print("error")
 
 
-    return render(request, 'manager/zaivki.html', data)
+    return render(request, 'manager/zaivki/zaivki.html', data)
+
+
+
+def group(request):
+    data = {}
+    data.update(init_news(request))
+    data['group'] = _get_grpoup()
+
+
+    return render(request, 'manager/group/group.html', data)
 
 
 
 
 
 
+def raspisanie(request):
+    data = {}
+    data.update(init_news(request))
+    data['form'] = time_table()
+    data['group'] = _get_grpoup()
 
-
-
-
-
-
+    return render(request, 'manager/group/raspisanie.html', data)
 
 
 
