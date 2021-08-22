@@ -643,6 +643,34 @@ def raspisanie(request):
 
 
 
+def message(request):
+    data = {}
+    data.update(init_news(request))
+    data['form'] = time_table()
+    data['group'] = _get_grpoup()
+
+    return render(request, 'manager/message/message.html', data)
+
+
+
+def about(request):
+    data = {}
+    data.update(init_news(request))
+    data['form'] = time_table()
+    data['group'] = _get_grpoup()
+
+    return render(request, 'manager/about/about.html', data)
+
+
+
+def contact(request):
+    data = {}
+    data.update(init_news(request))
+    data['form'] = time_table()
+    data['group'] = _get_grpoup()
+
+    return render(request, 'manager/about/contact.html', data)
+
 
 
 

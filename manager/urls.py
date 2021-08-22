@@ -47,6 +47,20 @@ urlpatterns = [
 
     path('bid/', views.bid, name='bid'),
 
+
+
+
+    path('message/', views.message, name='message'),
+
+
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+
+
+
+
+
+
     #api
     path('api/login', views.api_login, name='api/login'),
     path('mail/', views.mail, name='mail'),

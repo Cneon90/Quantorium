@@ -4639,13 +4639,20 @@ label {
 }
 .telo
 {
-  background: #5f2eea;
+  background: #5887ff;
   color: white;
   min-height: 200px;
   height: 300px;
   padding: 10px;
   overflow: hidden;
 }
+
+.darkmode .telo
+{
+  background: rgba(3, 17, 80, 0.42);
+}
+
+
 .ndata
 {
   text-align: right;
