@@ -32,11 +32,10 @@
                         <th class="name"> Почта </th>
 
                         <th class="name"> Телефон </th>
-                        <th class="name"> Школа </th>
-                        <th class="name"> Класс </th>
 
 
                         <th class="name"> Изменить </th>
+                        <th class="name"> Права </th>
                         <th class="name"> Удалить  </th>
 
                     </tr> <!--ряд с ячейками заголовков-->
@@ -46,12 +45,18 @@
                                 <td class="names2"> {{ user.email }}</td>
 
                                 <td class="names2"> {{ user.profile.Phone }}</td>
-                                <td class="names2"> {{ user.profile.School_name }}</td>
-                                <td class="names2"> {{ user.profile.School_class }}</td>
+
 
 
 
                                 <td class="names2"> <a href="redit?id={{ user.id }}"> Изменить </a>  </td>
+                                <td class="names2">
+
+                                    {% for prava in user.get_all_permissions %}
+                                        {{ prava }}
+                                      {% endfor %}
+
+                                </td>
                                 <td class="names3"> <a href="delete?id={{ user.id }}"> Удалить </a></td>
 
 

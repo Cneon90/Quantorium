@@ -188,6 +188,8 @@ def setting(request):
             u.email = dataform['email']
             u.save()
 
+            #Отправка письма потдверждения
+
             pro.Passport_series = dataform['Passport_series']
             pro.Passport_number = dataform['Passport_number']
             pro.Passport_received = dataform['Passport_received']
@@ -219,6 +221,14 @@ def myprofile(request,name):
     data.update(init_news(request))
     data['user'] = User.objects.get(username=name)
     data['age'] = calculate_age(data['user'].profile.Birth_date)
+
+    #if request.GET.get('password'):
+       # print(request.GET['password'])
+       # Im=User.objects.get(id=request.user.id)
+        #print(Im.check_password(request.GET['password']))#проверка пароля
+        #Im.set_password("kirill") #изменение пароля
+        #Im.save()
+       # print(Im.check_password(request.GET['password']))
 
     return render(request, 'manager/home/myprofile.html', data)
 
@@ -674,6 +684,37 @@ def contact(request):
 
 
 
+def repassword(request):
+    data = {}
+    data.update(init_news(request))
+    data['form'] = retry_password()
+    re_user = User.objects.get(pk=request.user.id)
+    if request.method == "POST":
+       form = retry_password(request.POST)
+       if form.is_valid():
+            dataform = form.cleaned_data
+            print(dataform)
+            if(re_user.check_password(dataform['old_password'])):
+                if dataform['new_password'] == dataform['new_password2']:
+                    data['res'] = 'Пароль изменен успешно!'
+                    re_user.set_password(dataform['new_password'])  # изменение пароля
+                    re_user.save()
+                else:
+                    data['res'] = 'Пароли не совпадают'
+            else:
+                data['res'] = 'Пароль не верный'
+
+       else:
+           data['res'] = form.errors.as_data()
+
+    return render(request, 'manager/home/repassword.html', data)
+
+
+
+
+
+
+
 
 #Api -----------------------------------------------
 def api_login(request):
@@ -704,7 +745,7 @@ def admin_user(request):
     data['prava'] = request.user.has_perm('manager.adminenter')
     data['new'] = novelty.objects.all().order_by('-pk')[:settings.NEWS_COLUMN]
     data['longing'] =request.user.is_authenticated
-
+    data['prav'] = request.user.get_all_permissions
 
     try:
         print(request.user.profile.Status)
@@ -721,4 +762,6 @@ def admin_user(request):
 
 
     return render(request, 'manager/admins.html', data)
+
+
 

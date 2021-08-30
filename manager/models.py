@@ -114,7 +114,7 @@ class claim(models.Model):
 admin.site.register(timetable)
 admin.site.register(Group)
 admin.site.register(Course)
-admin.site.register(Profile)
+
 admin.site.register(Parent)
 admin.site.register(personal)
 admin.site.register(novelty)

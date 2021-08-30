@@ -26,7 +26,7 @@
 
 
                           Имя:      {{ user.username }} <br>
-                          маил:  {{ user.email }}<br>
+                          маил:  {{ user.email }} не подтверждено<br>
                           Город: {{ user.profile.Location }}<br>
                           Номер школы: {{ user.profile.School_name }}<br>
                           Класс: {{ user.profile.School_class }}<br>
@@ -45,6 +45,19 @@
 
               </div>
               </div>
+              <div class="text">
+
+               <table>
+
+                            <tr>
+                                <td class="names2"> <a href="{% url 'repassword' %}"> Сменить пароль </a> </td>
+                                <td class="names2"> Подтвердить почту</td>
+
+                            </tr>
+
+                  </table>
+              </div>
+
 
           </div>
           <div class="col-lg-3">
