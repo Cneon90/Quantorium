@@ -688,7 +688,8 @@ def repassword(request):
     data = {}
     data.update(init_news(request))
     data['form'] = retry_password()
-    re_user = User.objects.get(pk=request.user.id)
+
+    re_user = User.objects.get(pk=request.user.pk)
     if request.method == "POST":
        form = retry_password(request.POST)
        if form.is_valid():
