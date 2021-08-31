@@ -31,6 +31,8 @@ def init_news(request):
 
 def calculate_age(born):
     today = date.today()
+    if born == None:
+        return "Не указан"
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 def _get_grpoup():
