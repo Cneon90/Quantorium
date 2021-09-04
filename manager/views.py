@@ -220,7 +220,10 @@ def myprofile(request,name):
     data={}
     data.update(init_news(request))
     data['user'] = User.objects.get(username=name)
-    data['age'] = calculate_age(data['user'].profile.Birth_date)
+    try:
+        data['age'] = calculate_age(data['user'].profile.Birth_date)
+    except:
+        data['age'] = "Не указан заранее"
 
     #if request.GET.get('password'):
        # print(request.GET['password'])

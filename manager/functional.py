@@ -31,7 +31,7 @@ def init_news(request):
 
 def calculate_age(born):
     today = date.today()
-    if born == None:
+    if born == '':
         return "Не указан"
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 

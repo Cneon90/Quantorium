@@ -40,6 +40,7 @@ class Profile(models.Model):
     Status = models.CharField(max_length=10, blank=True)
     id_stepik = models.CharField(max_length=10, blank=True)
 
+
     def __str__(self):
         return self.user.username
 
