@@ -346,7 +346,7 @@ def profile_group(request,id_profile):
         return redirect('group')
 
     data['group'] = gr
-    return render(request, 'manager/group/profile_group.html', data)
+    return render(request, 'manager/group/group_profile.html', data)
 
 
 
@@ -413,7 +413,7 @@ def create_group(request):
                 new=Group.objects.create(g_name=dataform['Name'])
                 new.save()#Сохраняем
 
-    return render(request, 'manager/group/create_group.html', data)
+    return render(request, 'manager/group/group_create.html', data)
 
 
 def delete_news(request,id_post):
@@ -646,13 +646,35 @@ def group(request):
 
 
 
-def raspisanie(request):
+def raspisanie(request,id_group):
     data = {}
     data.update(init_news(request))
     data['form'] = time_table()
-    data['group'] = _get_grpoup()
+    data['id_page'] = id_group
+    data['gruppa'] = Group.objects.get(id=id_group)
+    if request.method == "POST":
+        form = time_table(request.POST)
+        if form.is_valid():
+            dataform = form.cleaned_data
+            #print(request.POST['item_id'])
+            gr=Group.objects.get(id=id_group)
+            tabl_time=timetable.objects.create(time=dataform['time'],name='django')
+            tabl_time.days=request.POST['item_id']
+            print(tabl_time)
+            tabl_time.save()
+            gr.day_work.add(tabl_time)
+            gr.save()
 
-    return render(request, 'manager/group/raspisanie.html', data)
+    return render(request, 'manager/group/group_raspisanie.html', data)
+
+
+def del_raspisanie(request,id_group,id_page):
+    data = {}
+    data.update(init_news(request))
+    print("delete")
+    tr=timetable.objects.get(id=id_group)
+    tr.delete()
+    return redirect('../../raspisanie/'+str(id_page))
 
 
 
@@ -712,6 +734,16 @@ def repassword(request):
            data['res'] = form.errors.as_data()
 
     return render(request, 'manager/home/repassword.html', data)
+
+
+
+def group_formation(request):
+    data = {}
+    data.update(init_news(request))
+    data['form'] = time_table()
+    data['group'] = _get_grpoup()
+
+    return render(request, 'manager/group/group_formation.html', data)
 
 
 

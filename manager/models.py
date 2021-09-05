@@ -20,7 +20,7 @@ day= (
 
 class timetable(models.Model):
     name = models.CharField(max_length=29, blank=True)
-    day = models.CharField(max_length=12, choices=day, null=True)
+    days = models.CharField(max_length=12, choices=day, null=True)
     time = models.TimeField(null=True, blank=True)
     def __str__(self):
         return self.name

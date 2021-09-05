@@ -1,0 +1,125 @@
+{% extends "manager/main.html" %}
+
+{% block bar %}
+  {% if user.is_authenticated %}   sidebar {% else %}  sidebarno {% endif %}
+{% endblock %}
+
+{% block creat_groups %}
+ active
+{% endblock %}
+
+
+{% block namepage %}
+      <i class="fa fa-university" aria-hidden="true"></i> Расписание группы {{ gruppa.g_name }}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+    <main class="main users chart-page" id="skip-target">
+      <div class="container">
+        <h2 class="main-title"></h2>
+
+            {% include 'manager/group/menu_group' %}
+
+
+
+
+        <div class="row">
+            <div class="col-lg-4">
+
+             <div class="add_group">
+                    <div class="headers"> Добавление времени занятия </div>
+
+              <form method="post">
+                   {% csrf_token %}
+                    День занятий
+                   <select name="item_id" >
+                            <option value="Понедельник">Понедельник</option>
+                            <option value="Вторник">Вторник</option>
+                            <option value="Среда">Среда</option>
+                            <option value="Четверг">Четверг</option>
+                            <option value="Пятница">Пятница</option>
+                            <option value="Суббота">Суббота</option>
+                  </select>
+
+                    <br>
+                    <br>
+                    <br>
+
+                     {{ form.as_p }}
+
+
+
+
+                    <br>
+                  <button class="btn-1" type="submit"> Добавить </button>
+              </form>
+             </div>
+
+
+
+            </div>
+
+
+
+            <div class="col-lg-5">
+              <div class="text">
+                  <div class="group_ras">
+                 <table>
+                    <tr>
+                        <th class="name">День</th>
+                        <th class="name"> Время </th>
+                        <th class="name"> Удалить </th>
+
+
+
+
+                     </tr>
+
+                      {% for day in gruppa.day_work.all  %}
+                        <td class="names2">  {{ day.days }}    </td>
+                        <td class="names2">  {{ day.time }}   </td>
+                        <td class="names2"> <a href="{% url 'del_raspisanie'  day.pk  id_page %} ">Удалить </a>   </td>
+
+                <tr>
+
+                </tr>
+                    {% endfor %}
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+       </div>
+
+
+
+
+            <div class="col-lg-3">
+            {% include 'manager/news/show_news.html' %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+{% endblock %}
+
+

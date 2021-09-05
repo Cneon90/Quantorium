@@ -20,7 +20,9 @@ urlpatterns = [
     path('create_group/', views.create_group, name='create_group'),                  #
     path('group/', views.group, name='group'),                  #
     path('profile_group/<int:id_profile>', views.profile_group, name='profile_group'),                  #
-    path('raspisanie/', views.raspisanie, name='raspisanie'),                  #
+    path('raspisanie/<int:id_group>', views.raspisanie, name='raspisanie'),                  #
+    path('del_raspisanie/<int:id_group>/<int:id_page>', views.del_raspisanie, name='del_raspisanie'),                  #
+    path('group_formation/', views.group_formation, name='group_formation'),                  #
               # Д
 
     #Course

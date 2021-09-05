@@ -64,8 +64,8 @@ class group_edit(forms.Form):
 
 class time_table(forms.Form):
     #Name = forms.CharField(label='Название группы', widget=forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Введите название группы'}))
-    day  = forms.DateField(label='День занятия', widget=forms.DateInput(attrs={'type':'date', }))
-    time = forms.TimeField(label='День занятия', widget=forms.TimeInput(attrs={'type':'time', }))
+    #day  = forms.DateField(label='День занятия', widget=forms.DateInput(attrs={'type':'date', }))
+    time = forms.TimeField(label='Время занятия', widget=forms.TimeInput(attrs={'type':'time', }))
 
 
 class retry_password(forms.Form):
@@ -73,3 +73,4 @@ class retry_password(forms.Form):
     old_password = forms.CharField(label='Старый пароль', widget=forms.PasswordInput(attrs={'class': 'form-label-wrapper', 'placeholder': 'Введите Старый пароль', 'id': 'old-password'}))
     new_password = forms.CharField(label='Новый пароль', widget=forms.PasswordInput(attrs={'class': 'form-input', 'placeholder': 'Введите Новый пароль', 'id': 'new-password'}))
     new_password2 = forms.CharField(label='Подтвердите пароль', widget=forms.PasswordInput(attrs={'class': 'form-input', 'placeholder': 'Повторите пароль', 'id': 'confirm-password'}))
+

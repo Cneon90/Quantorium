@@ -1,6 +1,8 @@
 <div class="row">
             <div class="col-lg-12">
-              <a class="btn-1" href="{% url 'group' %}"> Группы </a>   <a class="btn-1" href="{% url 'create_group' %}"> Изменить группу </a>  <a class="btn-1" href="{% url 'raspisanie' %}"> Расписание групп </a>
+              <a class="btn-1" href="{% url 'group' %}"> Группы </a>
+              <a class="btn-1" href="{% url 'create_group' %}"> Добавить группу </a>
+              <a class="btn-1" href="{% url 'group_formation' %}"> Формирование групп </a>
 
 
                 <hr class="menu_group">
